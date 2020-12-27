@@ -1,6 +1,8 @@
 package br.com.alterdata.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,32 +12,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TB_PERIODOS")
-public class Periodos implements Serializable{
+@Table(name = "TB_PERIODOS")
+public class Periodos implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@Column(name = "mes_disponivel")
-	private String mesDisponivel;
-	
+	private List<Colaborador> mesesDisponivel = new ArrayList<>();
+
 	@Column(name = "dia_inicio")
 	private short diaInicio;
-	
+
 	@Column(name = "dia_final")
 	private short diaFinal;
 
 	public Periodos() {
-		
+
 	}
-	
-	public Periodos(long id, String mesDisponivel, short diaInicio, short diaFinal) {
+
+	public Periodos(long id, List<Colaborador> mesesDisponivel, short diaInicio, short diaFinal) {
 		super();
 		this.id = id;
-		this.mesDisponivel = mesDisponivel;
+		this.mesesDisponivel = mesesDisponivel;
 		this.diaInicio = diaInicio;
 		this.diaFinal = diaFinal;
 	}
@@ -48,12 +50,14 @@ public class Periodos implements Serializable{
 		this.id = id;
 	}
 
-	public String getMesDisponivel() {
-		return mesDisponivel;
+	public List<Colaborador> getMesesDisponivel() {
+		return mesesDisponivel;
 	}
 
-	public void setMesDisponivel(String mesDisponivel) {
-		this.mesDisponivel = mesDisponivel;
+	public void setMesesDisponivel(List<Colaborador> mesesDisponivel) {
+		for(int i= 0; i< 12; i++) {
+			
+		}
 	}
 
 	public short getDiaInicio() {
@@ -71,4 +75,5 @@ public class Periodos implements Serializable{
 	public void setDiaFinal(short diaFinal) {
 		this.diaFinal = diaFinal;
 	}
+
 }
