@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import { useHistory } from 'react-router-dom'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import {
@@ -19,7 +20,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 
 
-import logo from '../../assets/imagens/logo.svg'
+import logo from '../../assets/imagens/logo.png'
 import miniLogo from '../../assets/imagens/miniLogo.png'
 
 const drawerWidth = 300;
@@ -92,6 +93,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function MiniDrawer() {
+    const history = useHistory();
     const classes = useStyles();
     const theme = useTheme();
     const lastState = JSON.parse(localStorage.getItem("@KAROO:drawer"))
@@ -136,24 +138,24 @@ export default function MiniDrawer() {
                             width: 50,
                             cursor: 'pointer',
                             alignSelf: 'center',
-                            marginBottom: 10
+                            marginBottom: 10,
+                            marginTop: 15
                         }}>
                     </img>}
                 <Divider />
                 <List>
-                    <ListItem button key="Dashboard">
-                        <ListItemIcon> <AccountCircleIcon style={{ color: '#eee' }} /></ListItemIcon>
-                        <ListItemText primary="Cadastrar Férias" />
-                    </ListItem>
-                    <ListItem button key="Configurações">
-                        <ListItemIcon><AssessmentIcon style={{ color: '#eee' }} /></ListItemIcon>
-                        <ListItemText primary="Gerar Relatório" />
-                    </ListItem>
-                </List>
+                    
+                        <ListItem button key="Dashboard" onClick={() => history.push('/')}>
+                            <ListItemIcon> <AccountCircleIcon style={{ color: '#eee' }} /></ListItemIcon>
+                            <ListItemText primary="Cadastrar Férias" />
+                        </ListItem>
 
-                {/* <InputArea>
-                    <input type="text" placeholder="Login do colaborador"/>
-                </InputArea> */}
+                        <ListItem button key="Relatorio" onClick={() => history.push('/relatorio')}>
+                            <ListItemIcon><AssessmentIcon style={{ color: '#eee' }} /></ListItemIcon>
+                            <ListItemText primary="Gerar Relatório" />
+                        </ListItem>
+
+                </List>
             </Drawer>
 
         </div>
