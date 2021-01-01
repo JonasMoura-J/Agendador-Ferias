@@ -1,6 +1,6 @@
 import React from "react";
-import Drawer from "../components/sideBar/Drawer";
-import Form from "../components/form"
+import Drawer from "../../components/sideBar/Drawer";
+import Form from "../../components/form"
 import {Content, Container} from "./style";
 
 

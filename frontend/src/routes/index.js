@@ -1,6 +1,6 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
-import Acesso from '../pages/Acesso'
+import Acesso from '../pages/acesso/index'
 
 const Routes = () => {
 

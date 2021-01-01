@@ -1,9 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import clsx from 'clsx';
 
-import {Content} from "./style";
+import {Content, Button} from "./style";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +23,9 @@ export default function LayoutTextFields() {
       <div>
         <Content>
           <TextField
-            style = {{width: "30ch"}}
+            style = {{width: "20vw", marginRight:"1.1vw"}}
             label="Login"
-            id="outlined-margin-none"
+            id="outlined"
             className={classes.textField}
             variant="outlined"
             InputLabelProps={{
@@ -34,7 +33,7 @@ export default function LayoutTextFields() {
             }}
           />
           <TextField
-            style = {{width: "60ch"}}
+            style = {{width: "35vw", marginLeft: 0}}
             label="Email"
             id="outlined"
             className={classes.textField}
@@ -46,9 +45,19 @@ export default function LayoutTextFields() {
             }}
           />
         </Content>
-        <Content style = {{marginLeft:"0.5vw", marginTop:"3vh"}}>
+        <Content style = {{marginTop:"3vh"}}>
           <TextField
-            style = {{ marginRight:"1vw"}}
+            style = {{width: "21.7vw", marginRight:"1.1vw"}}
+            label="Nome"
+            id="outlined-margin-none"
+            className={classes.textField}
+            variant="outlined"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            style = {{marginRight:"1.1vw"}}
             id="outlined-number"
             label= "Dias"
             select
@@ -85,8 +94,8 @@ export default function LayoutTextFields() {
           }}
           variant="outlined"
         />
-
         </Content>
+        <Button>Finalizar</Button>
       </div>
     </form>
   );
