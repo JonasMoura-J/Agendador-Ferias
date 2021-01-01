@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
+import {InputArea} from './style'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import {
     Drawer,
+    List,
     CssBaseline,
     Divider,
     IconButton,
-
+    ListItem,
+    ListItemIcon,
+    ListItemText,
 } from '@material-ui/core';
 
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Search from '@material-ui/icons/Search';
 
 
-import logo from '../assets/imagens/logo.svg'
-import miniLogo from '../assets/imagens/miniLogo.png'
+import logo from '../../assets/imagens/logo.svg'
+import miniLogo from '../../assets/imagens/miniLogo.png'
 
 const drawerWidth = 300;
 
@@ -135,8 +140,10 @@ export default function MiniDrawer() {
                         }}>
                     </img>}
                 <Divider />
-                {/* <label>Login do colaborador</label>
-                <input>maria.dsn.pack</input> */}
+
+                <InputArea>
+                    <input type="text" placeholder="Login do colaborador"/>
+                </InputArea>
             </Drawer>
 
         </div>
