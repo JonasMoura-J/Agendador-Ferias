@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {InputArea} from './style'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -16,7 +15,8 @@ import {
 
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Search from '@material-ui/icons/Search';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 
 import logo from '../../assets/imagens/logo.svg'
@@ -140,10 +140,20 @@ export default function MiniDrawer() {
                         }}>
                     </img>}
                 <Divider />
+                <List>
+                    <ListItem button key="Dashboard">
+                        <ListItemIcon> <AccountCircleIcon style={{ color: '#eee' }} /></ListItemIcon>
+                        <ListItemText primary="Cadastrar Férias" />
+                    </ListItem>
+                    <ListItem button key="Configurações">
+                        <ListItemIcon><AssessmentIcon style={{ color: '#eee' }} /></ListItemIcon>
+                        <ListItemText primary="Gerar Relatório" />
+                    </ListItem>
+                </List>
 
-                <InputArea>
+                {/* <InputArea>
                     <input type="text" placeholder="Login do colaborador"/>
-                </InputArea>
+                </InputArea> */}
             </Drawer>
 
         </div>
