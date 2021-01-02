@@ -10,7 +10,7 @@ const Acesso = () => {
     <Container>
       <Drawer />
         <Content>
-          <h1 style={{margin: '20px auto 30px', color: '#888', fontWeight: "bold"}}>Acesso</h1>
+          <h1>Acesso</h1>
           
           <Form/>
         </Content>

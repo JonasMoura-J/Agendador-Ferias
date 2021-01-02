@@ -1,8 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import {
+  makeStyles,
+  Divider,
+  TextField,
+  InputAdornment
+} from '@material-ui/core';
 
 import {Content, Button} from "./style";
+
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +27,25 @@ export default function LayoutTextFields() {
   return (
     <form className={classes.root}>
       <div>
+
         <Content>
+          <TextField
+            style={{}}
+            className={classes.margin}
+            id="input-with-icon-textfield"
+            label= "Login do coleborador"
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Content>
+        <Divider />
+        <Content style={{marginTop:"5vw"}}>
           <TextField
             style = {{width: "20vw", marginRight:"1.1vw"}}
             label="Login"
@@ -45,6 +69,7 @@ export default function LayoutTextFields() {
             }}
           />
         </Content>
+
         <Content style = {{marginTop:"3vh"}}>
           <TextField
             style = {{width: "21.7vw", marginRight:"1.1vw"}}
@@ -95,7 +120,10 @@ export default function LayoutTextFields() {
           variant="outlined"
         />
         </Content>
-        <Button>Finalizar</Button>
+
+        <Content>
+          <Button>Finalizar</Button>
+        </Content>
       </div>
     </form>
   );

@@ -15,26 +15,8 @@ export const Content = styled.div`
 
     h1 {
         font-size: 50px;
-        font-family:'Roboto';
+        font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         color: #75757A;
-        margin: 20px auto 30px;
-
+        margin: 30px 0;
     }
-
-    button {
-        font-family:'Roboto';
-        color: white;
-        background:  #f1592a;
-        border: 0;
-        padding: 13px;
-        border-radius: 5px;
-        outline: none;
-        transition: .1s;
-        margin-left: 53vw;     
-
-        &:hover {
-            opacity: .8;
-        }
-    }
-
 `;

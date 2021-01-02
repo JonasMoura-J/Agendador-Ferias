@@ -1,4 +1,5 @@
 import React from "react";
+import OpcoesRelatorio from "../../components/opcoesRelatorio/";
 import Drawer from "../../components/sideBar/Drawer";
 import {Content, Container} from "./style";
 
@@ -7,7 +8,8 @@ const Relatorio = () => {
         <Container>
             <Drawer />
             <Content>
-                <h1>Gerar Relatório</h1>
+                <h1>Gerar relatório</h1>
+                <OpcoesRelatorio/>
 
             </Content>
       </Container>
