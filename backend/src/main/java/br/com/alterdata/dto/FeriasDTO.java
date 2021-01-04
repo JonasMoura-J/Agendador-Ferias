@@ -19,6 +19,7 @@ public class FeriasDTO {
 	
 	private Colaborador colaborador;
 	
+	@SuppressWarnings("unused")
 	private FeriasDTO() {
 		
 	}
