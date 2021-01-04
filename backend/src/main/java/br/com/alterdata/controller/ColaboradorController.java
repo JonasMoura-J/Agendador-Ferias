@@ -34,5 +34,4 @@ public class ColaboradorController {
 				
 		return ResponseEntity.status(HttpStatus.OK).body(colaborador);
 	}
-	
 }

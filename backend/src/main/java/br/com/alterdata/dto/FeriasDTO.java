@@ -1,22 +1,12 @@
-package br.com.alterdata.domain;
+package br.com.alterdata.dto;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import br.com.alterdata.domain.Colaborador;
+import br.com.alterdata.domain.Ferias;
 
-@Entity
-@Table(name="TB_FERIAS")
-public class Ferias implements Serializable{
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FeriasDTO {
+	
 	private long id;
 	
 	private LocalDate dataInicio;
@@ -29,11 +19,11 @@ public class Ferias implements Serializable{
 	
 	private Colaborador colaborador;
 	
-	public Ferias() {
+	private FeriasDTO() {
 		
 	}
-
-	public Ferias(long id, LocalDate dataInicio, LocalDate dataFim, int duracao, boolean estaAtivo, Colaborador colaborador) {
+	
+	public FeriasDTO(long id, LocalDate dataInicio, LocalDate dataFim, int duracao, boolean estaAtivo, Colaborador colaborador) {
 		super();
 		this.id = id;
 		this.dataInicio = dataInicio;
@@ -41,6 +31,17 @@ public class Ferias implements Serializable{
 		this.duracao = duracao;
 		this.estaAtivo = estaAtivo;
 		this.colaborador = colaborador;
+	}
+
+	
+	public FeriasDTO(Ferias ferias) {
+		super();
+		this.id = ferias.getId();
+		this.dataInicio = ferias.getDataInicio();
+		this.dataFim = ferias.getDataFim();
+		this.duracao = ferias.getDuracao();
+		this.estaAtivo = ferias.isEstaAtivo();
+		this.colaborador = ferias.getColaborador();
 	}
 
 	public long getId() {
@@ -90,5 +91,4 @@ public class Ferias implements Serializable{
 	public void setColaborador(Colaborador colaborador) {
 		this.colaborador = colaborador;
 	}
-
 }
