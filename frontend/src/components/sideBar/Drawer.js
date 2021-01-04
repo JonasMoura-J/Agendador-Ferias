@@ -18,7 +18,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AssessmentIcon from '@material-ui/icons/Assessment';
-
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import logo from '../../assets/imagens/logo.png'
 import miniLogo from '../../assets/imagens/miniLogo.png'
@@ -153,6 +153,11 @@ export default function MiniDrawer() {
                         <ListItem button key="Relatorio" onClick={() => history.push('/relatorio')}>
                             <ListItemIcon><AssessmentIcon style={{ color: '#eee' }} /></ListItemIcon>
                             <ListItemText primary="Gerar Relatório" />
+                        </ListItem>
+
+                        <ListItem button key="Ferias Ativas" onClick={() => history.push('/ativas')}>
+                            <ListItemIcon><CheckCircleOutlineIcon style={{ color: '#eee' }} /></ListItemIcon>
+                            <ListItemText primary="Férias Ativas"/>
                         </ListItem>
 
                 </List>
