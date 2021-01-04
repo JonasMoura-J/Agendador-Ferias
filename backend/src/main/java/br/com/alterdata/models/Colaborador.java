@@ -23,24 +23,28 @@ public class Colaborador implements Serializable{
 	
 	private String nome;
 	
+	private String email;
+	
 	private LocalDate dataAdmissao;
 	
-	private Departamento departamento;
+	private String departamento;
 	
-	private String cargo;
+	private Ferias ferias;
 
 	public Colaborador() {
 		
 	}
 
-	public Colaborador(long id, String login, String nome, LocalDate ultimaFerias, String setor, String cargo) {
+	public Colaborador(long id, String login, String nome, String email, LocalDate dataAdmissao, String departamento,
+			Ferias ferias) {
 		super();
 		this.id = id;
 		this.login = login;
 		this.nome = nome;
-		this.ultimaFerias = ultimaFerias;
-		this.setor = setor;
-		this.cargo = cargo;
+		this.email = email;
+		this.dataAdmissao = dataAdmissao;
+		this.departamento = departamento;
+		this.ferias = ferias;
 	}
 
 	public long getId() {
@@ -67,30 +71,36 @@ public class Colaborador implements Serializable{
 		this.nome = nome;
 	}
 
-	public LocalDate getUltimaFerias() {
-		return ultimaFerias;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUltimaFerias(LocalDate ultimaFerias) {
-		this.ultimaFerias = ultimaFerias;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getSetor() {
-		return setor;
+	public LocalDate getDataAdmissao() {
+		return dataAdmissao;
 	}
 
-	public void setSetor(String setor) {
-		String[] setorSplit = getLogin().split(".");
-		this.setor = setorSplit[2];
+	public void setDataAdmissao(LocalDate dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
 	}
 
-	public String getCargo() {
-		return cargo;
+	public String getDepartamento() {
+		return departamento;
 	}
 
-	public void setCargo(String cargo) {
-		String[] setorSplit = getLogin().split(".");
-		this.setor = setorSplit[1];
+	public void setDepartamento() {
+		String[] departamentoSplit = getLogin().split(".");
+		this.departamento = departamentoSplit[1] + departamentoSplit[2];
 	}
-	
+
+	public Ferias getFerias() {
+		return ferias;
+	}
+
+	public void setFerias(Ferias ferias) {
+		this.ferias = ferias;
+	}
 }
