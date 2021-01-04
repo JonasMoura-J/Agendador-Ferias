@@ -1,4 +1,4 @@
-package br.com.alterdata.models;
+package br.com.alterdata.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
