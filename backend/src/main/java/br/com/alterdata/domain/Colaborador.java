@@ -7,9 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,14 +28,6 @@ public class Colaborador implements Serializable{
 	private LocalDate dataAdmissao;
 	
 	private String departamento;
-	
-	@OneToOne
-	@JoinTable (
-				name = "colaborador_ferias",
-				joinColumns = @JoinColumn(name = "ferias_id", referencedColumnName =  "id"),
-				inverseJoinColumns = @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-				)
-	private Ferias ferias;
 
 	public Colaborador() {
 		
@@ -53,7 +42,6 @@ public class Colaborador implements Serializable{
 		this.email = email;
 		this.dataAdmissao = dataAdmissao;
 		this.departamento = departamento;
-		this.ferias = ferias;
 	}
 
 	public long getId() {
@@ -100,16 +88,8 @@ public class Colaborador implements Serializable{
 		return departamento;
 	}
 
-	public void setDepartamento() {
-		String[] departamentoSplit = getLogin().split(".");
-		this.departamento = departamentoSplit[1] + departamentoSplit[2];
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
 	}
 
-	public Ferias getFerias() {
-		return ferias;
-	}
-
-	public void setFerias(Ferias ferias) {
-		this.ferias = ferias;
-	}
 }

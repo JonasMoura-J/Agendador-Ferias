@@ -18,27 +18,9 @@ public class ColaboradorDTO implements Serializable{
 	
 	private String email;
 	
-	private LocalDate dataAdmissao;
-	
-	private String departamento;
-	
-	private Ferias ferias;
-	
 	@SuppressWarnings("unused")
 	private ColaboradorDTO() {
 		
-	}
-
-	public ColaboradorDTO(long id, String login, String nome, String email, LocalDate dataAdmissao, String departamento,
-			Ferias ferias) {
-		super();
-		this.id = id;
-		this.login = login;
-		this.nome = nome;
-		this.email = email;
-		this.dataAdmissao = dataAdmissao;
-		this.departamento = departamento;
-		this.ferias = ferias;
 	}
 	
 	public ColaboradorDTO(Colaborador colaborador) {
@@ -47,9 +29,7 @@ public class ColaboradorDTO implements Serializable{
 		this.login = colaborador.getLogin();
 		this.nome = colaborador.getNome();
 		this.email = colaborador.getEmail();
-		this.dataAdmissao = colaborador.getDataAdmissao();
-		this.departamento = colaborador.getDepartamento();
-		this.ferias = colaborador.getFerias();
+
 	}
 
 	public long getId() {
@@ -82,29 +62,5 @@ public class ColaboradorDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public LocalDate getDataAdmissao() {
-		return dataAdmissao;
-	}
-
-	public void setDataAdmissao(LocalDate dataAdmissao) {
-		this.dataAdmissao = dataAdmissao;
-	}
-
-	public String getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
-	}
-
-	public Ferias getFerias() {
-		return ferias;
-	}
-
-	public void setFerias(Ferias ferias) {
-		this.ferias = ferias;
 	}
 }

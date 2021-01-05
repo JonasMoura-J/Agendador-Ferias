@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +30,12 @@ public class Ferias implements Serializable{
 	
 	private boolean estaAtivo;
 	
+	@OneToOne
+	@JoinTable (
+				name = "ferias_colaborador",
+				joinColumns = @JoinColumn(name = "colaborador_id", referencedColumnName =  "id"),
+				inverseJoinColumns = @JoinColumn(name = "ferias_id", referencedColumnName = "id")
+				)
 	private Colaborador colaborador;
 	
 	public Ferias() {
