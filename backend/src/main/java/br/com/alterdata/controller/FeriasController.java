@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alterdata.domain.Ferias;
 import br.com.alterdata.dto.FeriasDTO;
+import br.com.alterdata.dto.FeriasRequestDTO;
+import br.com.alterdata.repositories.ColaboradorRepository;
 import br.com.alterdata.repositories.FeriasRepository;
 
 @RestController
@@ -21,6 +23,9 @@ public class FeriasController {
 	
 	@Autowired
 	FeriasRepository feriasRepository;
+	
+	@Autowired
+	ColaboradorRepository colaboradorRepository;
 	
 	@GetMapping("/ferias")
 	public ResponseEntity <List<FeriasDTO>> findAll() {
@@ -31,8 +36,10 @@ public class FeriasController {
 	}
 	
 	@PostMapping("/ferias")
-	public ResponseEntity<Ferias> postFerias(@RequestBody Ferias ferias) {
+	public ResponseEntity<Ferias> postFerias(@RequestBody FeriasRequestDTO dto) {
 
+		Ferias ferias = dto.toFerias(colaboradorRepository);
+		
 		Optional<Ferias> valida = feriasRepository.findById(ferias.getId());
 		
 		if (valida == null && ferias.EhValido()) {

@@ -30,8 +30,9 @@ public class ColaboradorController {
 	
 	@GetMapping("/colaborador/{login}")
 	public ResponseEntity<ColaboradorDTO> listaProdutoUnico(@PathVariable String login) {
-		ColaboradorDTO colaborador = colaboradorRepository.findByLogin(login);
+		Colaborador colaborador = colaboradorRepository.findByLogin(login);
+		ColaboradorDTO colaboradorDTO = new ColaboradorDTO(colaborador);
 				
-		return ResponseEntity.status(HttpStatus.OK).body(colaborador);
+		return ResponseEntity.status(HttpStatus.OK).body(colaboradorDTO);
 	}
 }
