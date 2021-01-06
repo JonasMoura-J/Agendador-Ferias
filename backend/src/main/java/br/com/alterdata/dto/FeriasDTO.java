@@ -15,8 +15,6 @@ public class FeriasDTO {
 	
 	private int duracao;
 	
-	private boolean estaAtivo;
-	
 	private Colaborador colaborador;
 	
 	@SuppressWarnings("unused")
@@ -24,13 +22,12 @@ public class FeriasDTO {
 		
 	}
 	
-	public FeriasDTO(long id, LocalDate dataInicio, LocalDate dataFim, int duracao, boolean estaAtivo, Colaborador colaborador) {
+	public FeriasDTO(long id, LocalDate dataInicio, LocalDate dataFim, int duracao, Colaborador colaborador) {
 		super();
 		this.id = id;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.duracao = duracao;
-		this.estaAtivo = estaAtivo;
 		this.colaborador = colaborador;
 	}
 
@@ -41,7 +38,6 @@ public class FeriasDTO {
 		this.dataInicio = ferias.getDataInicio();
 		this.dataFim = ferias.getDataFim();
 		this.duracao = ferias.getDuracao();
-		this.estaAtivo = ferias.isEstaAtivo();
 		this.colaborador = ferias.getColaborador();
 	}
 
@@ -75,14 +71,6 @@ public class FeriasDTO {
 
 	public void setDuracao(int duracao) {
 		this.duracao = duracao;
-	}
-
-	public boolean isEstaAtivo() {
-		return estaAtivo;
-	}
-
-	public void setEstaAtivo(boolean estaAtivo) {
-		this.estaAtivo = estaAtivo;
 	}
 
 	public Colaborador getColaborador() {

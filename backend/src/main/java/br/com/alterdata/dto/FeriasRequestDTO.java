@@ -19,8 +19,6 @@ public class FeriasRequestDTO {
 	
 	private int duracao;
 	
-	private boolean estaAtivo;
-	
 	private String login;
 	
 	public Ferias toFerias(ColaboradorRepository repository) {
@@ -33,7 +31,7 @@ public class FeriasRequestDTO {
 		
 		Colaborador c = colaborador;
 		
-		Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, this.estaAtivo, c);
+		Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, c);
 		
 		return ferias;
 	}
@@ -68,14 +66,6 @@ public class FeriasRequestDTO {
 
 	public void setDuracao(int duracao) {
 		this.duracao = duracao;
-	}
-
-	public boolean isEstaAtivo() {
-		return estaAtivo;
-	}
-
-	public void setEstaAtivo(boolean estaAtivo) {
-		this.estaAtivo = estaAtivo;
 	}
 
 	public String getLogin() {

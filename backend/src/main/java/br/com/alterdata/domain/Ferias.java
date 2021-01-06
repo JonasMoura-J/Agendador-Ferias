@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="TB_FERIAS")
@@ -22,13 +23,14 @@ public class Ferias implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NotNull
 	private LocalDate dataInicio;
 
+	@NotNull
 	private LocalDate dataFim;
 	
+	@NotNull
 	private int duracao;
-	
-	private boolean estaAtivo;
 	
 	@OneToOne
 	@JoinTable (
@@ -36,19 +38,19 @@ public class Ferias implements Serializable{
 				joinColumns = @JoinColumn(name = "colaborador_id", referencedColumnName =  "id"),
 				inverseJoinColumns = @JoinColumn(name = "ferias_id", referencedColumnName = "id")
 				)
+	@NotNull
 	private Colaborador colaborador;
 	
 	public Ferias() {
 		
 	}
 
-	public Ferias(long id, LocalDate dataInicio, LocalDate dataFim, int duracao, boolean estaAtivo, Colaborador colaborador) {
+	public Ferias(long id, LocalDate dataInicio, LocalDate dataFim, int duracao, Colaborador colaborador) {
 		super();
 		this.id = id;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.duracao = duracao;
-		this.estaAtivo = estaAtivo;
 		this.colaborador = colaborador;
 	}
 
@@ -84,14 +86,6 @@ public class Ferias implements Serializable{
 		this.duracao = duracao;
 	}
 
-	public boolean isEstaAtivo() {
-		return estaAtivo;
-	}
-
-	public void setEstaAtivo(boolean estaAtivo) {
-		this.estaAtivo = estaAtivo;
-	}
-
 	public Colaborador getColaborador() {
 		return colaborador;
 	}
@@ -101,6 +95,7 @@ public class Ferias implements Serializable{
 	}
 
 	public boolean EhValido() {
+		
 		return colaborador.getDataAdmissao().getMonthValue() < LocalDate.now().getMonthValue()? true : false;
 	}
 }

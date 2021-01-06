@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alterdata.domain.Ferias;
 import br.com.alterdata.dto.FeriasDTO;
 import br.com.alterdata.dto.FeriasRequestDTO;
+import br.com.alterdata.enums.Funcao;
 import br.com.alterdata.repositories.ColaboradorRepository;
 import br.com.alterdata.repositories.FeriasRepository;
 
@@ -54,6 +55,23 @@ public class FeriasController {
 		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
 	}
 	
+	@GetMapping("ferias/{funcao}/{mes}/{ano}")
+	public ResponseEntity <List<FeriasDTO>> listarPorFucaoEPeriodo(@PathVariable Funcao funcao, @PathVariable int mes,  @PathVariable int ano) {
+
+		List<Ferias> ferias = feriasRepository.findAll();
+		
+		List<Ferias> feriasPorPeriodo = new ArrayList<>();
+		
+		for (Ferias f : ferias) {
+			if(f.getDataInicio().getMonthValue()== mes && f.getDataInicio().getYear()== ano && f.getColaborador().getFuncao() == funcao) {
+				feriasPorPeriodo.add(f);
+			}
+		}
+		List<FeriasDTO> feriasDTO = feriasPorPeriodo.stream().map(x -> new FeriasDTO(x)).collect(Collectors.toList());
+		
+		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
+	}
+	
 	
 	@PostMapping("/ferias")
 	public ResponseEntity<Ferias> postFerias(@RequestBody FeriasRequestDTO dto) {
@@ -83,7 +101,6 @@ public class FeriasController {
 		feriasExistente.setDataFim(feriasAtualizada.getDataFim());
 		feriasExistente.setDataInicio(feriasAtualizada.getDataInicio());
 		feriasExistente.setDuracao(feriasAtualizada.getDuracao());
-		feriasExistente.setEstaAtivo(feriasAtualizada.isEstaAtivo());
 		feriasExistente.setId(feriasAtualizada.getId());
 		
 		feriasRepository.save(feriasExistente);
