@@ -1,5 +1,6 @@
 package br.com.alterdata.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,24 @@ public class FeriasController {
 		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
 	}
 	
+	@GetMapping("ferias/{mes}/{ano}")
+	public ResponseEntity <List<FeriasDTO>> listarPorPeriodo(@PathVariable int mes,  @PathVariable int ano) {
+
+		List<Ferias> ferias = feriasRepository.findAll();
+		
+		List<Ferias> feriasPorPeriodo = new ArrayList<>();
+		
+		for (Ferias f : ferias) {
+			if(f.getDataInicio().getMonthValue()== mes && f.getDataInicio().getYear()== ano ) {
+				feriasPorPeriodo.add(f);
+			}
+		}
+		List<FeriasDTO> feriasDTO = feriasPorPeriodo.stream().map(x -> new FeriasDTO(x)).collect(Collectors.toList());
+		
+		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
+	}
+	
+	
 	@PostMapping("/ferias")
 	public ResponseEntity<Ferias> postFerias(@RequestBody FeriasRequestDTO dto) {
 
@@ -43,7 +62,7 @@ public class FeriasController {
 		
 		Ferias valida = feriasRepository.findById(ferias.getId());
 		
-		if (valida == null && ferias.EhValido()) {
+		if (valida == null) {
 			feriasRepository.save(ferias);
 			return new ResponseEntity<>(ferias, HttpStatus.CREATED);
 		}
