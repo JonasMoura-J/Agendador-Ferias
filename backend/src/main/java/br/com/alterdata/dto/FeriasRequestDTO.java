@@ -2,6 +2,7 @@ package br.com.alterdata.dto;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.Period;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpServerErrorException;
@@ -32,7 +33,16 @@ public class FeriasRequestDTO {
 		
 		Colaborador c = colaborador;
 		
-		Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, c);
+		int diferencaEmDias = Period.between(this.dataInicio, this.dataFim).getDays();
+		LocalDate inicio = this.dataInicio;
+				
+			if(diferencaEmDias == this.duracao) {
+	            this.dataInicio = inicio;
+	        }else {
+	        	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "As datas não condizem com a duração definida");
+	        }
+		
+		Ferias ferias = new Ferias(this.id, inicio, this.dataFim, this.duracao, c);
 		
 		return ferias;
 	}
@@ -50,14 +60,6 @@ public class FeriasRequestDTO {
 	}
 
 	public void setDataInicio(LocalDate dataInicio) {
-//		try {
-//			if(dataInicio.plusDays(this.duracao) == this.dataFim.minusDays(this.duracao)) {
-//				this.dataInicio = dataInicio;
-//			}
-//			
-//		} catch (Exception e) {
-//			throw new DateTimeException("A data inicial não pode ser maior que a final");
-//		}
 		this.dataInicio = dataInicio;
 	}
 
@@ -66,13 +68,7 @@ public class FeriasRequestDTO {
 	}
 
 	public void setDataFim(LocalDate dataFim) {
-		try {
-			if(this.dataInicio.plusDays(this.duracao) == dataFim.minusDays(this.duracao)) {
-				this.dataFim = dataFim;
-			}
-		} catch (Exception e) {
-			throw new DateTimeException("A data inicial não pode ser maior que a final");
-		}
+		this.dataFim = dataFim;
 	}
 
 	public int getDuracao() {

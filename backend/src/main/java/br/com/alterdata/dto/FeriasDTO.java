@@ -1,6 +1,5 @@
 package br.com.alterdata.dto;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import br.com.alterdata.domain.Colaborador;
