@@ -95,7 +95,6 @@ public class Ferias implements Serializable{
 	}
 
 	public boolean EhValido() {
-		
 		return colaborador.getDataAdmissao().getMonthValue() < LocalDate.now().getMonthValue()? true : false;
 	}
 }

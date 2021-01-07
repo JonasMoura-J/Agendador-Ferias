@@ -1,5 +1,6 @@
 package br.com.alterdata.dto;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import org.springframework.http.HttpStatus;
@@ -49,6 +50,14 @@ public class FeriasRequestDTO {
 	}
 
 	public void setDataInicio(LocalDate dataInicio) {
+//		try {
+//			if(dataInicio.plusDays(this.duracao) == this.dataFim.minusDays(this.duracao)) {
+//				this.dataInicio = dataInicio;
+//			}
+//			
+//		} catch (Exception e) {
+//			throw new DateTimeException("A data inicial não pode ser maior que a final");
+//		}
 		this.dataInicio = dataInicio;
 	}
 
@@ -57,7 +66,13 @@ public class FeriasRequestDTO {
 	}
 
 	public void setDataFim(LocalDate dataFim) {
-		this.dataFim = dataFim;
+		try {
+			if(this.dataInicio.plusDays(this.duracao) == dataFim.minusDays(this.duracao)) {
+				this.dataFim = dataFim;
+			}
+		} catch (Exception e) {
+			throw new DateTimeException("A data inicial não pode ser maior que a final");
+		}
 	}
 
 	public int getDuracao() {
