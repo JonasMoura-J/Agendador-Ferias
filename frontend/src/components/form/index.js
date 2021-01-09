@@ -42,6 +42,7 @@ export default function LayoutTextFields() {
             InputLabelProps={{
               shrink: true,
             }}
+            required
           />
         </Grid>
 
@@ -68,6 +69,7 @@ export default function LayoutTextFields() {
             InputLabelProps={{
               shrink: true,
             }}
+            required
           />
         </Grid>
         
@@ -84,6 +86,7 @@ export default function LayoutTextFields() {
               native: true,
             }}
             variant="outlined"
+            required
           >
             <option>15</option>
             <option>30</option>
@@ -100,6 +103,7 @@ export default function LayoutTextFields() {
             shrink: true,
           }}
           variant="outlined"
+          required
           />
         </Grid>
 
@@ -113,11 +117,12 @@ export default function LayoutTextFields() {
               shrink: true,
             }}
             variant="outlined"
+            required
           />
         </Grid>
 
         <Grid item xs={12}>
-          <Button style={{alignItems:"center"}}>Finalizar</Button>
+          <Button style={{fontSize:"1rem"}}>Finalizar</Button>
         </Grid>
       </Grid>
     </Content>
