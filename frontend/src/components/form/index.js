@@ -7,32 +7,35 @@ import {
   Grid,
 } from "@material-ui/core";
 
-import { Content, Button, ContainerGrid } from "./style";
+import { Content, Button, ContainerGrid } from "./style.js";
+import '../../index.css'
 
 import SearchIcon from "@material-ui/icons/Search";
 
 export default function LayoutTextFields() {
   return (
-    <>
-      
-      <div>
-        <TextField
-          id="input-with-icon-textfield"
-          label="Login do coleborador"
-          variant="outlined"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-
-      </div>
-      <ContainerGrid>
-
+    
+    <Content>
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
           <TextField
+            style={{width:"47%", marginBottom:"50px"}}
+            id="input-with-icon-textfield"
+            className="medium-input"
+            label= "Login do coleborador"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+
+        <Grid item xs={6}>
+          <TextField
+            style={{width:"100%"}}
             label="Login"
             id="outlined"
             variant="outlined"
@@ -40,19 +43,11 @@ export default function LayoutTextFields() {
               shrink: true,
             }}
           />
+        </Grid>
 
-        <div>
+        <Grid item xs={6}>
           <TextField
-            label="Email"
-            id="outlined"
-            type="email"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-
-          <TextField
+            style={{width:"100%"}}
             label="Nome"
             id="outlined-margin-none"
             variant="outlined"
@@ -60,26 +55,44 @@ export default function LayoutTextFields() {
               shrink: true,
             }}
           />
-        </div>
-      </ContainerGrid>
-      <div>
-        <TextField
-          id="outlined-number"
-          label="Dias"
-          select
-          InputLabelProps={{
-            shrink: true,
-          }}
-          SelectProps={{
-            native: true,
-          }}
-          variant="outlined"
-        >
-          <option>15</option>
-          <option>30</option>
-        </TextField>
+        </Grid>
 
-        <TextField
+        <Grid item xs={12}>
+          <TextField
+            style={{width:"100%"}}
+            label="Email"
+            id="outlined"
+            fullWidth
+            type = "email"
+            variant="outlined"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </Grid>
+        
+        <Grid item xs={2}>
+          <TextField
+            style={{width:"100%"}}
+            id="outlined-number"
+            label= "Dias"
+            select
+            InputLabelProps={{
+              shrink: true,
+            }}
+            SelectProps={{
+              native: true,
+            }}
+            variant="outlined"
+          >
+            <option>15</option>
+            <option>30</option>
+          </TextField>
+        </Grid>
+
+        <Grid item xs={5}>
+          <TextField
+          style={{width:"100%"}}
           id="outlined-date"
           label="Início das Férias"
           type="date"
@@ -87,116 +100,26 @@ export default function LayoutTextFields() {
             shrink: true,
           }}
           variant="outlined"
-        />
+          />
+        </Grid>
 
-        <TextField
-          id="outlined-date"
-          label="Fim das Férias"
-          type="date"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-      </div>
+        <Grid item xs={5}>
+          <TextField
+            style={{width:"100%"}}
+            id="outlined-date"
+            label="Fim das Férias"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+          />
+        </Grid>
 
-      <Button>Finalizar</Button>
-    </>
-
-    // <Grid container spacing={3}>
-    //   <Grid item xs={12} style={{display:"flex", justifyContent:"center"}}>
-    //     <TextField
-    //       id="input-with-icon-textfield"
-    //       label= "Login do coleborador"
-    //       variant="outlined"
-    //       InputProps={{
-    //         startAdornment: (
-    //           <InputAdornment position="start">
-    //             <SearchIcon />
-    //           </InputAdornment>
-    //         ),
-    //       }}
-    //     />
-    //   </Grid>
-    //   <Divider />
-
-    //   <Grid item xs={6} style={{display:"flex", justifyContent:"center"}}>
-    //     <TextField
-    //       label="Login"
-    //       id="outlined"
-    //       variant="outlined"
-    //       InputLabelProps={{
-    //         shrink: true,
-    //       }}
-    //     />
-    //   </Grid>
-
-    //   <Grid item xs={5} style={{display:"flex", justifyContent:"center"}}>
-    //     <TextField
-    //       label="Email"
-    //       id="outlined"
-    //       fullWidth
-    //       type = "email"
-    //       variant="outlined"
-    //       InputLabelProps={{
-    //         shrink: true,
-    //       }}
-    //     />
-    //   </Grid>
-
-    //   <Grid item xs={3} style={{display:"flex", justifyContent:"center"}}>
-    //     <TextField
-    //       label="Nome"
-    //       id="outlined-margin-none"
-    //       variant="outlined"
-    //       InputLabelProps={{
-    //         shrink: true,
-    //       }}
-    //     />
-    //   </Grid>
-    //   <Grid item xs={3} style={{display:"flex", justifyContent:"center"}}>
-    //     <TextField
-    //       id="outlined-number"
-    //       label= "Dias"
-    //       select
-    //       InputLabelProps={{
-    //         shrink: true,
-    //       }}
-    //       SelectProps={{
-    //         native: true,
-    //       }}
-    //       variant="outlined"
-    //     >
-    //       <option>15</option>
-    //       <option>30</option>
-    //     </TextField>
-    //   </Grid>
-    //   <Grid item xs={3} style={{display:"flex", justifyContent:"center"}}>
-    //     <TextField
-    //     id="outlined-date"
-    //     label="Início das Férias"
-    //     type="date"
-    //     InputLabelProps={{
-    //       shrink: true,
-    //     }}
-    //     variant="outlined"
-    //     />
-    //   </Grid>
-    //   <Grid item xs={3}>
-    //     <TextField
-    //       id="outlined-date"
-    //       label="Fim das Férias"
-    //       type="date"
-    //       InputLabelProps={{
-    //         shrink: true,
-    //       }}
-    //       variant="outlined"
-    //     />
-    //   </Grid>
-
-    //   <Grid item xs={4} style={{display:"flex", justifyContent:"center"}}>
-    //     <Button>Finalizar</Button>
-    //   </Grid>
-    // </Grid>
+        <Grid item xs={12}>
+          <Button style={{alignItems:"center"}}>Finalizar</Button>
+        </Grid>
+      </Grid>
+    </Content>
   );
 }

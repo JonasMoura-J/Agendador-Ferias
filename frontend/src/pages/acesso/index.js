@@ -10,7 +10,7 @@ const Acesso = () => {
     <Container>
       <Drawer />
         <Content>
-          <h1>Acesso</h1>
+          <h1>Registro de Férias</h1>
           
           <Form/>
         </Content>

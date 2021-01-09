@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Content = styled.div`
+    width: 45vw;
     display: flex;
     flex:1;
     align-items:center;
     justify-content:center;
-    flex-direction: row;
-    margin-bottom: 6vh;
+    flex-direction: column;
 `;
 
 export const Button = styled.button`
@@ -22,13 +22,4 @@ export const Button = styled.button`
     &:hover {
         opacity: .8;
     }
-`;
-
-export const ContainerGrid = styled.div`
-    width: 90vw;
-    display: grid;
-    grid-template-rows: 20vh 20vh;
-    justify-content: center;
-    grid-gap: 0 20px;
-    
 `;

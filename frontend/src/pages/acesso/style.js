@@ -17,6 +17,6 @@ export const Content = styled.div`
         font-size: 50px;
         font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         color: #75757A;
-        margin: 30px 0;
+        margin: 20px 0 50px 0;
     }
 `;
