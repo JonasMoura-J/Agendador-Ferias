@@ -9,9 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="TB_FERIAS")
@@ -32,7 +35,8 @@ public class Ferias implements Serializable{
 	@NotNull
 	private int duracao;
 	
-	@OneToOne
+	@ManyToOne
+	@JsonIgnore
 	@JoinTable (
 				name = "ferias_colaborador",
 				joinColumns = @JoinColumn(name = "colaborador_id", referencedColumnName =  "id"),

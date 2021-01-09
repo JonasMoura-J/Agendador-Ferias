@@ -23,3 +23,12 @@ export const Button = styled.button`
         opacity: .8;
     }
 `;
+
+export const ContainerGrid = styled.div`
+    width: 90vw;
+    display: grid;
+    grid-template-rows: 20vh 20vh;
+    justify-content: center;
+    grid-gap: 0 20px;
+    
+`;

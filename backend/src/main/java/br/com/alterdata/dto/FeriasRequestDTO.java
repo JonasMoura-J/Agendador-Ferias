@@ -1,6 +1,5 @@
 package br.com.alterdata.dto;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -36,12 +35,11 @@ public class FeriasRequestDTO {
 		int diferencaEmDias = Period.between(this.dataInicio, this.dataFim).getDays();
 		LocalDate inicio = this.dataInicio;
 				
-			if(diferencaEmDias == this.duracao) {
-	            this.dataInicio = inicio;
-	        }else {
-	        	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "As datas não condizem com a duração definida");
-	        }
-		
+		if(diferencaEmDias == this.duracao) {
+            this.dataInicio = inicio;
+        }else {
+        	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "As datas não condizem com a duração definida");
+        }
 		Ferias ferias = new Ferias(this.id, inicio, this.dataFim, this.duracao, c);
 		
 		return ferias;
@@ -86,5 +84,9 @@ public class FeriasRequestDTO {
 	public void setLogin(String login) {
 		this.login = login;
 	}
+	
+//	public boolean verificaFerias(List<FeriasDTO> Todasferias, Ferias novaFerias) {
+//
+//	}
 
 }

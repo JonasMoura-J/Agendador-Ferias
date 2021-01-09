@@ -1,5 +1,7 @@
 package br.com.alterdata.controller;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.alterdata.domain.Colaborador;
 import br.com.alterdata.domain.Ferias;
 import br.com.alterdata.dto.FeriasDTO;
 import br.com.alterdata.dto.FeriasRequestDTO;
@@ -23,6 +26,8 @@ import br.com.alterdata.repositories.FeriasRepository;
 
 @RestController
 public class FeriasController {
+	
+	LocalDate dataHoje = LocalDate.now();
 	
 	@Autowired
 	FeriasRepository feriasRepository;
@@ -71,18 +76,26 @@ public class FeriasController {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
 	}
-	
-	
+
 	@PostMapping("/ferias")
 	public ResponseEntity<Ferias> postFerias(@RequestBody FeriasRequestDTO dto) {
-		
+
 		Ferias ferias = dto.toFerias(colaboradorRepository);
 		
 		Ferias valida = feriasRepository.findById(ferias.getId());
 		
 		if (valida == null) {
-			feriasRepository.save(ferias);
-			return new ResponseEntity<>(ferias, HttpStatus.CREATED);
+			
+			if(ferias.getColaborador().getFerias().isEmpty() &&
+					Period.between(dataHoje, ferias.getColaborador().getDataAdmissao()).getMonths() >= 12) {
+				
+				Colaborador colaborador = colaboradorRepository.findByLogin(dto.getLogin());
+				colaborador.getFerias().add(ferias);
+				
+				feriasRepository.save(ferias);
+				return new ResponseEntity<>(ferias, HttpStatus.CREATED);
+			}
+			
 		}
 		return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 	}

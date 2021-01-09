@@ -1,8 +1,13 @@
 package br.com.alterdata.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.ElementCollection;
 
 import br.com.alterdata.domain.Colaborador;
+import br.com.alterdata.domain.Ferias;
 
 public class ColaboradorDTO implements Serializable{
 
@@ -16,6 +21,9 @@ public class ColaboradorDTO implements Serializable{
 	
 	private String email;
 	
+	@ElementCollection(targetClass=Ferias.class)
+	private Set<Ferias> ferias = new HashSet<>();
+	
 	@SuppressWarnings("unused")
 	private ColaboradorDTO() {
 		
@@ -27,7 +35,7 @@ public class ColaboradorDTO implements Serializable{
 		this.login = colaborador.getLogin();
 		this.nome = colaborador.getNome();
 		this.email = colaborador.getEmail();
-
+		this.ferias = colaborador.getFerias();
 	}
 
 	public long getId() {
@@ -61,4 +69,13 @@ public class ColaboradorDTO implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Set<Ferias> getFerias() {
+		return ferias;
+	}
+
+	public void setFerias(Set<Ferias> ferias) {
+		this.ferias = ferias;
+	}
+
 }

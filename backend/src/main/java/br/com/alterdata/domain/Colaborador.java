@@ -2,7 +2,10 @@ package br.com.alterdata.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -43,12 +46,15 @@ public class Colaborador implements Serializable{
 	@Enumerated(value = EnumType.STRING)
 	private Funcao funcao;
 
+	@ElementCollection(targetClass=Ferias.class)
+	private Set<Ferias> ferias = new HashSet<>();
+
 	public Colaborador() {
 		
 	}
 
 	public Colaborador(long id, @NotNull String login, @NotNull String nome, @NotNull String email,
-			@NotNull LocalDate dataAdmissao, @NotNull String departamento, @NotNull Funcao funcao) {
+			@NotNull LocalDate dataAdmissao, @NotNull String departamento, @NotNull Funcao funcao, Set<Ferias> ferias) {
 		super();
 		this.id = id;
 		this.login = login;
@@ -57,6 +63,7 @@ public class Colaborador implements Serializable{
 		this.dataAdmissao = dataAdmissao;
 		this.departamento = departamento;
 		this.funcao = funcao;
+		this.ferias = ferias;
 	}
 
 	public long getId() {
@@ -115,4 +122,12 @@ public class Colaborador implements Serializable{
 		this.funcao = funcao;
 	}
 
+	public Set<Ferias> getFerias() {
+		return ferias;
+	}
+
+	public void setFerias(Set<Ferias> ferias) {
+		this.ferias = ferias;
+	}
+	
 }
