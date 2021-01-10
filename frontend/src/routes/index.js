@@ -1,6 +1,6 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
-import FeriasAtivas from '../components/tabelaFeriasAtivas'
+import FeriasAtivas from '../pages/feriasAtivas'
 import Acesso from '../pages/acesso/index'
 import NotFound from '../pages/notFound'
 import Relatorio from '../pages/relatorio'

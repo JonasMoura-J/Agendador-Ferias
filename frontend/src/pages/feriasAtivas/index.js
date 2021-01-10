@@ -1,17 +1,22 @@
-import Drawer from '../../Components/Drawer'
-import { Container, Content } from './style'
-import TabelaFeriasAtivas from '../../components/TabelaFeriasAtivas'
+import React from "react";
+import Drawer from "../../components/sideBar/Drawer";
+import {Content, Container} from "./style";
+import TabelaFeriasAtivas from "../../components/tabelaFeriasAtivas";
+
 
 const FeriasAtivas = () => {
 
-    return (
-        <Container>
-            <Drawer />
-            <Content>
-                <h1>Auditoria</h1>
-                <TabelaFeriasAtivas/>
-            </Content>
-        </Container>
-    )
+  return (
+    <Container>
+      <Drawer />
+        <Content>
+          <h1>Buscar registro de férias</h1>
+          
+          <TabelaFeriasAtivas/>
+        </Content>
+      </Container>
+ 
+  );
 }
+
 export default FeriasAtivas;
