@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import {TextField, Grid} from '@material-ui/core';
 
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import TableChartIcon from '@material-ui/icons/TableChart';
@@ -22,32 +22,41 @@ const OpcoesRelatorios = () => {
   const classes = useStyles();
 
   return (
-    <form className={classes.root}>
-      <div>
-        <Content style = {{marginTop:"3vh"}}>
-            <h3>Gerar relatório dos ultimos dias</h3>
+    <Content>
+      <Grid container spacing={4}>
+          <Grid item xs={12}>
+              <h3>Gerar relatório dos ultimos dias</h3>
+          </Grid>
+
+          <Grid item xs={12}>
             <TextField
-                style = {{marginRight:"1.1vw"}}
-                id="outlined-number"
-                select
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                SelectProps={{
-                    native: true,
-                }}
-                variant="outlined"
-                >
-                <option>15</option>
-                <option>30</option>
-            </TextField>    
-        </Content>
-        <Content>
-            <Button style={{backgroundColor:"#c74c4a"}}>Gerar PDF <PictureAsPdfIcon fontSize = 'small'/></Button>
-            <Button style={{backgroundColor:"#1f6f45"}}>Gerar xls <TableChartIcon fontSize = 'small'/></Button>
-        </Content>
-      </div>
-    </form>
+              style={{width:"20%"}}
+              id="outlined-number"
+              select
+              InputLabelProps={{
+                  shrink: true,
+              }}
+              SelectProps={{
+                  native: true,
+              }}
+              variant="outlined"
+              size="small"
+              >
+              <option>15</option>
+              <option>30</option>
+            </TextField> 
+          </Grid>
+
+          <Grid item xs={6}>
+              <Button style={{backgroundColor:"#c74c4a", width:"100%"}}>Gerar PDF <PictureAsPdfIcon fontSize = 'small'/></Button>
+          </Grid>
+
+          <Grid item xs={6}>
+              <Button style={{backgroundColor:"#1f6f45", width:"100%"}}>Gerar xls <TableChartIcon fontSize = 'small'/></Button>
+          </Grid>
+
+        </Grid>
+    </Content>
   );
 }
 export default OpcoesRelatorios;

@@ -96,17 +96,17 @@ export default function MiniDrawer() {
     const history = useHistory();
     const classes = useStyles();
     const theme = useTheme();
-    const lastState = JSON.parse(localStorage.getItem("@KAROO:drawer"))
+    const lastState = JSON.parse(localStorage.getItem("@FERIAS:drawer"))
     const [open, setOpen] = useState(lastState !== null ? lastState : true)
 
     const handleDrawerOpen = () => {
         setOpen(true);
-        localStorage.setItem("@KAROO:drawer", true)
+        localStorage.setItem("@FERIAS:drawer", true)
     };
 
     const handleDrawerClose = () => {
         setOpen(false);
-        localStorage.setItem("@KAROO:drawer", false)
+        localStorage.setItem("@FERIAS:drawer", false)
 
     };
 
@@ -128,12 +128,12 @@ export default function MiniDrawer() {
                 }}>
                 {open ?
                     <div className={classes.toolbar} onClick={handleDrawerClose}>
-                        <img src={logo} style={{ width: "75%", alignSelf: 'center', cursor: 'pointer', margin: 10 }} alt='Logo Karoo' />
+                        <img src={logo} style={{ width: "75%", alignSelf: 'center', cursor: 'pointer', margin: 10 }} alt='Logo Aterdata' />
                         <IconButton style={{ color: "#fff" }}>
                             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                         </IconButton>
                     </div> :
-                    <img src={miniLogo} alt='Mini Logo Karoo' onClick={handleDrawerOpen}
+                    <img src={miniLogo} alt='Mini Logo Alterdata' onClick={handleDrawerOpen}
                         style={{
                             width: 50,
                             cursor: 'pointer',
@@ -145,21 +145,21 @@ export default function MiniDrawer() {
                 <Divider />
                 <List>
                     
-                        <ListItem button key="Dashboard" onClick={() => history.push('/')}>
-                            <ListItemIcon> <AccountCircleIcon style={{ color: '#eee' }} /></ListItemIcon>
-                            <ListItemText primary="Cadastrar Férias" />
-                        </ListItem>
+                    <ListItem button key="Dashboard" onClick={() => history.push('/')}>
+                        <ListItemIcon> <AccountCircleIcon style={{ color: '#eee' }} /></ListItemIcon>
+                        <ListItemText primary="Cadastrar Férias" />
+                    </ListItem>
 
-                        <ListItem button key="Relatorio" onClick={() => history.push('/relatorio')}>
-                            <ListItemIcon><AssessmentIcon style={{ color: '#eee' }} /></ListItemIcon>
-                            <ListItemText primary="Gerar Relatório" />
-                        </ListItem>
 
-                        <ListItem button key="Ferias Ativas" onClick={() => history.push('/ativas')}>
-                            <ListItemIcon><CheckCircleOutlineIcon style={{ color: '#eee' }} /></ListItemIcon>
-                            <ListItemText primary="Férias Ativas"/>
-                        </ListItem>
+                    <ListItem button key="Ferias Ativas" onClick={() => history.push('/ativas')}>
+                        <ListItemIcon><CheckCircleOutlineIcon style={{ color: '#eee' }} /></ListItemIcon>
+                        <ListItemText primary="Férias Ativas"/>
+                    </ListItem>
 
+                    <ListItem button key="Relatorio" onClick={() => history.push('/relatorio')}>
+                        <ListItemIcon><AssessmentIcon style={{ color: '#eee' }} /></ListItemIcon>
+                        <ListItemText primary="Gerar Relatório" />
+                    </ListItem>
                 </List>
             </Drawer>
 

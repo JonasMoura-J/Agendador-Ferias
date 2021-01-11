@@ -1,23 +1,41 @@
-import {React, useState} from 'react';
+import {React, useEffect, useState, useCallback} from 'react';
 
-import objetos from './objetos.json'
+import objetos from '../../json/objetos.json'
 import {Content, Button} from './style.js'
 
 import {
-    makeStyles,
-    Divider,
     TextField,
-    InputAdornment,
     Grid,
   } from "@material-ui/core";
 
-const InputRegistros = () => {
+import api from '../../services/api';
+
+const InputRegistros = ({getFeriasAtivas}) => {
 
     const [lista] = useState (objetos);
 
     const meses = Array.from(Array(12), (_, i) => i+1)
 
+    const [funcao, setFuncao] = useState("Todas")
+    const [mes, setMes] = useState(new Date().getMonth()+1)
+    const [ano, setAno] = useState(new Date().getFullYear())
+
+    const getRegistros = useCallback(async () => {
+        try {
+          let rota = funcao === 'Todas'? `ferias/${mes}/${ano}`: `ferias/${funcao}/${mes}/${ano}`
+          const response = await api.get(rota);
+          getFeriasAtivas(response.data);
+        } catch (error) {
+          console.log("getRegistros: ", error);
+        }
+    }, [funcao, mes, ano])
+
+    useEffect (()=>{
+        getRegistros()
+    },[])
+
     return(
+        
         <Content>
             <Grid container spacing={4}>
                 <Grid item xs={5}>
@@ -35,6 +53,8 @@ const InputRegistros = () => {
                     }}
                     variant="outlined"
                     required
+                    defaultValue="Todas"
+                    onChange = {e => setFuncao(e.target.value)}
                 >
                     {lista.funcoes.map(l => (
                         <option>{l.nome}</option>
@@ -57,6 +77,8 @@ const InputRegistros = () => {
                     }}
                     variant="outlined"
                     required
+                    defaultValue={new Date().getMonth()}
+                    onChange = {e => setMes(e.target.value)}
                 >
                     {meses.map(l => (
                         <option>{l}</option>
@@ -79,7 +101,8 @@ const InputRegistros = () => {
                     }}
                     variant="outlined"
                     required
-                    defaultValue= {new Date().getFullYear()}
+                    defaultValue={new Date().getFullYear()}
+                    onChange = {e => setAno(e.target.value)}
                 >
                     {lista.anos.map(l => (
                         <option>{l.ano}</option>
@@ -88,9 +111,8 @@ const InputRegistros = () => {
                 </Grid>
 
                 <Grid item xs={2}>
-                    <Button size="small" style={{fontSize:"1rem"}}>Buscar</Button>
+                    <Button size="small" style={{fontSize:"1rem"}} onClick={getRegistros}>Buscar</Button>
                 </Grid>
-
             </Grid>
         </Content>
     )

@@ -20,9 +20,10 @@ export const Button = styled.button`
 `;
 
 export const Content = styled.div`
+    width: 50vw;
     display: flex;
-    flex-direction: row;
     flex:1;
-    justify-content: center;
-    margin-top: 5vh;
+    align-items:center;
+    justify-content:center;
+    flex-direction: column;
 `;

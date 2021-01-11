@@ -67,3 +67,28 @@ export const InputCadastro = styled.input `
     }
 
 `;
+
+export const Button = styled.button`
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    background-color:#4b5c6b;
+    cursor: pointer;
+    border: 0;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    transition: .1s;    
+    &:hover {
+        opacity: .8;
+    }
+`;
+
+export const Content = styled.div`
+    width: 45vw;
+    display: flex;
+    flex:1;
+    align-items:center;
+    justify-content:center;
+    flex-direction: column;
+    margin: 30px 0 50px 0;
+`;

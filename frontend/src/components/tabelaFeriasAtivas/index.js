@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useState, useCallback, useEffect} from 'react';
 
 import {
   Table,
@@ -9,18 +9,20 @@ import {
   TablePagination,
   TableHead,
   makeStyles,
-  Paper
+  Paper,
+  Grid
 } from '@material-ui/core';
 
-import {Container} from './style';
-import Inputs from '../inputsTabelaRegistroFerias'
+import {Container, Button} from './style';
 
-const TabelaFeriasAtivas = () => {
+import api from '../../services/api';
+
+const TabelaFeriasAtivas = ({feriasAtivas}) => {
 
   const styles = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [users, setUsers] = useState([]);
+  const [ferias, setferias] = useState([]);
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -33,7 +35,6 @@ const TabelaFeriasAtivas = () => {
 
   return( 
     <>
-      <Inputs/>
         <Container className={styles.root}>
           <Paper>
             <TableContainer className={styles.container}>
@@ -45,22 +46,21 @@ const TabelaFeriasAtivas = () => {
                     <TableCell>Fim da férias</TableCell>
                     <TableCell>Duração</TableCell>
                     <TableCell>Login</TableCell>
-                    <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
+
                   {
-                    users.map(user => {
+                    feriasAtivas&&
+                    feriasAtivas.map(ferias => {
                       return (
                         <>
-                          <TableRow hover key={user.id}>
-                            <TableCell>{}</TableCell>
-                            <TableCell>{}</TableCell>
-                            <TableCell>{}</TableCell>
-                            <TableCell>{}</TableCell>
-                            <TableCell>{}</TableCell>
-                            <TableCell style={{ display: "flex", justifyContent: "flex-end" }}>
-                            </TableCell>
+                          <TableRow hover key={ferias.id}>
+                            <TableCell>{ferias.id}</TableCell>
+                            <TableCell>{ferias.dataInicio}</TableCell>
+                            <TableCell>{ferias.dataFim}</TableCell>
+                            <TableCell>{ferias.duracao}</TableCell>
+                            <TableCell>{ferias.colaborador.login}</TableCell>
                           </TableRow>
                         </>
                       );
@@ -72,7 +72,7 @@ const TabelaFeriasAtivas = () => {
             <TablePagination
               rowsPerPageOptions={[10, 20, 40]}
               component="div"
-              count={users.length}
+              count={ferias.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
