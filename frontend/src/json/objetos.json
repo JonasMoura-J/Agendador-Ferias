@@ -10,33 +10,27 @@
         },
         {
             "id":3,
-            "nome": "Gestor",
-            "enum": "GESTOR"
+            "nome": "Gestor"
         },
         {
             "id":4,
-            "nome": "Diretor",
-            "enum": "DIRETOR"
+            "nome": "Diretor"
         },
         {
             "id":5,
-            "nome": "Designer",
-            "enum": "DESIGNER"
+            "nome": "Designer"
         },
         {
             "id":6,
-            "nome": "Vendedor",
-            "enum": "VENDEDOR"
+            "nome": "Vendedor"
         },
         {
             "id":7,
-            "nome": "Desenvolvedor",
-            "enum": "DESENVOLVEDOR"
+            "nome": "Desenvolvedor"
         },
         {
             "id":7,
-            "nome": "QA",
-            "enum": "QA"
+            "nome": "SQA"
         }
     ],
 
