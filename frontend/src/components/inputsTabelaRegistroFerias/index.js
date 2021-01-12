@@ -21,8 +21,12 @@ const InputRegistros = ({getFeriasAtivas}) => {
     const [ano, setAno] = useState(new Date().getFullYear())
 
     const getRegistros = useCallback(async () => {
+        const semEspacos = funcao.replace(" ","_");
+        const funcaoFormatada = semEspacos.toUpperCase();
+
         try {
-          let rota = funcao === 'Todas'? `ferias/${mes}/${ano}`: `ferias/${funcao}/${mes}/${ano}`
+        console.log("funcao",funcaoFormatada)
+          let rota = funcao === 'Todas'? `ferias/${mes}/${ano}`: `ferias/${funcaoFormatada}/${mes}/${ano}`
           const response = await api.get(rota);
           getFeriasAtivas(response.data);
         } catch (error) {
@@ -38,7 +42,7 @@ const InputRegistros = ({getFeriasAtivas}) => {
         
         <Content>
             <Grid container spacing={4}>
-                <Grid item xs={5}>
+                <Grid item xs={4}>
                 <TextField
                     style={{width:"100%"}}
                     size="small"
@@ -57,12 +61,12 @@ const InputRegistros = ({getFeriasAtivas}) => {
                     onChange = {e => setFuncao(e.target.value)}
                 >
                     {lista.funcoes.map(l => (
-                        <option>{l.nome}</option>
+                        <option key={l.id}>{l.nome}</option>
                     ))}
                 </TextField>
                 </Grid>
 
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                 <TextField
                     size="small"
                     style={{width:"100%"}}
@@ -81,7 +85,7 @@ const InputRegistros = ({getFeriasAtivas}) => {
                     onChange = {e => setMes(e.target.value)}
                 >
                     {meses.map(l => (
-                        <option>{l}</option>
+                        <option key={l}>{l}</option>
                     ))}
                 </TextField>
                 </Grid>
@@ -105,7 +109,7 @@ const InputRegistros = ({getFeriasAtivas}) => {
                     onChange = {e => setAno(e.target.value)}
                 >
                     {lista.anos.map(l => (
-                        <option>{l.ano}</option>
+                        <option key={l.id}>{l.ano}</option>
                     ))}
                 </TextField>
                 </Grid>

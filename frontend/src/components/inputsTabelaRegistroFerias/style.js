@@ -6,7 +6,7 @@ export const Content = styled.div`
     flex:1;
     align-items:center;
     justify-content:center;
-    flex-direction: column;
+    flex-direction: row;
     margin: 30px 0 50px 0;
 `;
 

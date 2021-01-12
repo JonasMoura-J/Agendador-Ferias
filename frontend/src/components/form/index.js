@@ -83,7 +83,7 @@ export default function LayoutTextFields() {
             style={{width:"100%", marginBottom:"50px"}}
             id="input-with-icon-textfield"
             className="medium-input"
-            label= "Login do coleborador"
+            label= "Login do colaborador"
             onChange={e => setLogin(e.target.value)}
           />
           
