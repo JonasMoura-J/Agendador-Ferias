@@ -12,7 +12,7 @@ import api from '../../services/api';
 
 const InputRegistros = ({getFeriasAtivas}) => {
 
-    const [lista] = useState (objetos);
+    const [lista] = useState(objetos);
 
     const meses = Array.from(Array(12), (_, i) => i+1)
 

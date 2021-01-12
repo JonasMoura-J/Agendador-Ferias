@@ -46,6 +46,7 @@ const TabelaFeriasAtivas = ({feriasAtivas}) => {
                     <TableCell>Fim da férias</TableCell>
                     <TableCell>Duração</TableCell>
                     <TableCell>Login</TableCell>
+                    <TableCell>Funcao</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -61,6 +62,7 @@ const TabelaFeriasAtivas = ({feriasAtivas}) => {
                             <TableCell>{ferias.dataFim}</TableCell>
                             <TableCell>{ferias.duracao}</TableCell>
                             <TableCell>{ferias.colaborador.login}</TableCell>
+                            <TableCell>{ferias.colaborador.funcao}</TableCell>
                           </TableRow>
                         </>
                       );

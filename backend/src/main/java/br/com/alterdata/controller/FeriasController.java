@@ -85,16 +85,12 @@ public class FeriasController {
 		Ferias valida = feriasRepository.findById(ferias.getId());
 		
 		if (valida == null) {
-			
-			if(ferias.getColaborador().getFerias().isEmpty() &&
-					Period.between(dataHoje, ferias.getColaborador().getDataAdmissao()).getMonths() >= 12) {
 				
 				Colaborador colaborador = colaboradorRepository.findByLogin(dto.getLogin());
 				colaborador.getFerias().add(ferias);
 				
 				feriasRepository.save(ferias);
 				return new ResponseEntity<>(ferias, HttpStatus.CREATED);
-			}
 			
 		}
 		return new ResponseEntity<>(HttpStatus.FORBIDDEN);

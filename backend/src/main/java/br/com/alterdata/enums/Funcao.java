@@ -6,4 +6,5 @@ public enum Funcao {
 	DIRETOR,
 	TECNICO_SUPORTE,
 	QA
+	
 }

@@ -18,7 +18,8 @@ export const Button = styled.button`
     padding: 13px;
     border-radius: 5px;
     outline: none;
-    transition: .1s;    
+    transition: .1s;   
+    cursor: pointer; 
     &:hover {
         opacity: .8;
     }
