@@ -1,4 +1,4 @@
-import React, { useState, useCallBack } from "react";
+import React, { useState, useCallBack, useEffect } from "react";
 import {
   makeStyles,
   Divider,
@@ -7,7 +7,7 @@ import {
   Grid,
 } from "@material-ui/core";
 
-import Alert from '@material-ui/lab/Alert';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import api from '../../services/api';
 
@@ -24,6 +24,10 @@ export default function LayoutTextFields() {
   const[inicio, setInicio] = useState("");
   const[fim, setFim] = useState("");
 
+  const[colaboradores, setColaboradores] = useState([])
+  const[colaborador, setColaborador] = useState("")
+  const[dadosColaborador, setDadosColaborador] = useState({})
+
   const CadastrarFerias = async() =>{
     const params = {
       login: login,
@@ -39,23 +43,54 @@ export default function LayoutTextFields() {
     }
   }
 
+  const teste = (e) =>{
+    console.log("texto",e)
+  }
+
+  const GetColaboradores = async() =>{
+    try {
+      const response = await api.get("colaboradores");
+      setColaboradores(response.data)
+    } catch (error) {
+      console.log("getColaboradores: ", error);
+    }
+  }
+
+  const GetColaborador = async() =>{
+    try {
+      console.log("alou",colaborador)
+      console.log("login",login)
+      const response = await api.get(`colaborador/${login}`);
+      setDadosColaborador(response.data)
+      setLogin(response.data.login)
+      teste()
+
+    } catch (error) {
+      console.log("getColaborador: ", error);
+    }
+  }
+
+  useEffect(() => {
+    GetColaboradores()
+  },[])
+
+
   return (
     <Content>
-      <Grid container spacing={4}>
-        <Grid item xs={12}>
-          <TextField
-            style={{width:"47%", marginBottom:"50px"}}
+      <Grid container spacing={5}>
+        <Grid item xs={6}>
+        <TextField
+            style={{width:"100%", marginBottom:"50px"}}
             id="input-with-icon-textfield"
             className="medium-input"
             label= "Login do coleborador"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
+            onChange={e => setLogin(e.target.value)}
           />
+          
+        </Grid>
+
+        <Grid item xs={2}>
+          <Button style={{fontSize:"1rem"}} onClick={() => GetColaborador()}><SearchIcon /></Button>
         </Grid>
 
         <Grid item xs={6}>
@@ -68,7 +103,7 @@ export default function LayoutTextFields() {
               shrink: true,
             }}
             required
-            onChange = {e => setLogin(e.target.value)}
+            value={dadosColaborador.login}
           />
         </Grid>
 
@@ -78,6 +113,7 @@ export default function LayoutTextFields() {
             label="Nome"
             id="outlined-margin-none"
             variant="outlined"
+            value={dadosColaborador.nome}
             InputLabelProps={{
               shrink: true,
             }}
@@ -96,6 +132,7 @@ export default function LayoutTextFields() {
               shrink: true,
             }}
             required
+            value={dadosColaborador.email}
             onChange = {e => setEmail(e.target.value)}
           />
         </Grid>

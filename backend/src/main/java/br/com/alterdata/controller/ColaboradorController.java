@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alterdata.domain.Colaborador;
 import br.com.alterdata.dto.ColaboradorDTO;
+import br.com.alterdata.dto.ColaboradorResponseDTO;
 import br.com.alterdata.repositories.ColaboradorRepository;
 
 @RestController
@@ -21,18 +22,26 @@ public class ColaboradorController {
 	ColaboradorRepository colaboradorRepository;
 	
 	@GetMapping("/colaboradores")
-	public ResponseEntity <List<ColaboradorDTO>> findAll() {
+	public ResponseEntity <List<ColaboradorDTO>> buscarTodos() {
 		List<Colaborador> colaboradores = colaboradorRepository.findAll();
 		List<ColaboradorDTO> colaboradoresDTO = colaboradores.stream().map(x -> new ColaboradorDTO(x)).collect(Collectors.toList());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(colaboradoresDTO);
 	}
 	
+	@GetMapping("/colaboradoresSimples")
+	public ResponseEntity <List<ColaboradorResponseDTO>> buscarTodosObjSimplificado() {
+		List<Colaborador> colaboradores = colaboradorRepository.findAll();
+		List<ColaboradorResponseDTO> colaboradorResponseDTO = colaboradores.stream().map(x -> new ColaboradorResponseDTO(x)).collect(Collectors.toList());
+		
+		return ResponseEntity.status(HttpStatus.OK).body(colaboradorResponseDTO);
+	}
+	
 	@GetMapping("/colaborador/{login}")
-	public ResponseEntity<ColaboradorDTO> listaProdutoUnico(@PathVariable String login) {
+	public ResponseEntity<ColaboradorResponseDTO> listaProdutoUnico(@PathVariable String login) {
 		Colaborador colaborador = colaboradorRepository.findByLogin(login);
-		ColaboradorDTO colaboradorDTO = new ColaboradorDTO(colaborador);
+		ColaboradorResponseDTO colaboradorResponseDTO = new ColaboradorResponseDTO(colaborador);
 				
-		return ResponseEntity.status(HttpStatus.OK).body(colaboradorDTO);
+		return ResponseEntity.status(HttpStatus.OK).body(colaboradorResponseDTO);
 	}
 }
