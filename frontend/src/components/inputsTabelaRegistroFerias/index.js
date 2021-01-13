@@ -4,13 +4,23 @@ import objetos from '../../json/objetos.json'
 import {Content, Button} from './style.js'
 
 import {
+    makeStyles,
     TextField,
     Grid,
   } from "@material-ui/core";
 
 import api from '../../services/api';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const InputRegistros = ({getFeriasAtivas}) => {
+    const alert = (mensagem, tipo) => {
+        toast(
+            mensagem,
+            {type: tipo}
+        );
+    }
 
     const [lista] = useState(objetos);
 
@@ -25,12 +35,18 @@ const InputRegistros = ({getFeriasAtivas}) => {
         const funcaoFormatada = semEspacos.toUpperCase();
 
         try {
-        console.log("funcao",funcaoFormatada)
-          let rota = funcao === 'Todas'? `ferias/${mes}/${ano}`: `ferias/${funcaoFormatada}/${mes}/${ano}`
-          const response = await api.get(rota);
-          getFeriasAtivas(response.data);
+            let rota = funcao === 'Todas'? `ferias/${mes}/${ano}`: `ferias/${funcaoFormatada}/${mes}/${ano}`
+            const response = await api.get(rota);
+            getFeriasAtivas(response.data);
+            console.log(response.data)
+
+                if(response.data.length === 0){
+                    alert('Não foi encontrado nenhum registro', 'warning')
+                }else{
+                    alert('Registros resgatados com sucesso!', 'success')
+            }
         } catch (error) {
-          console.log("getRegistros: ", error);
+          alert('Falha ao recuperar registros', 'error')
         }
     }, [funcao, mes, ano])
 
@@ -115,9 +131,10 @@ const InputRegistros = ({getFeriasAtivas}) => {
                 </Grid>
 
                 <Grid item xs={2}>
-                    <Button size="small" style={{fontSize:"1rem"}} onClick={getRegistros}>Buscar</Button>
+                    <Button size="small" style={{fontSize:"1rem"}} onClick={() => getRegistros()}>Buscar</Button>
                 </Grid>
             </Grid>
+            <ToastContainer />
         </Content>
     )
 }
