@@ -7,8 +7,7 @@ import {
   Grid,
 } from "@material-ui/core";
 
-import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import emailjs from 'emailjs-com';
 import api from '../../services/api';
 
 import {Content, Button} from "./style.js";
@@ -28,8 +27,19 @@ export default function LayoutTextFields() {
   const[fim, setFim] = useState("");
 
   const[colaboradores, setColaboradores] = useState([])
-  const[colaborador, setColaborador] = useState("")
   const[dadosColaborador, setDadosColaborador] = useState({})
+
+  function sendEmail(e) {
+    e.preventDefault();
+
+    emailjs.sendForm('gmail', 'template_0n31h1k', e.target, 'user_6Wf2CL2KUCH1pl77JfkY7')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+      e.target.reset()
+  }
 
   const CadastrarFerias = async() =>{
     const params = {
@@ -41,15 +51,11 @@ export default function LayoutTextFields() {
     try {
       await api.post("ferias", params);
       alert('Férias registrada com sucesso!', 'success')
+      sendEmail()
       
     } catch (error) {
-      console.log("Erro no Cadastro");
       alert('Erro ao registrar férias!', 'error')
     }
-  }
-
-  const teste = (e) =>{
-    console.log("texto",e)
   }
 
   const GetColaboradores = async() =>{
@@ -63,12 +69,9 @@ export default function LayoutTextFields() {
 
   const GetColaborador = async() =>{
     try {
-      console.log("alou",colaborador)
-      console.log("login",login)
       const response = await api.get(`colaborador/${login}`);
       setDadosColaborador(response.data)
       setLogin(response.data.login)
-      teste()
 
     } catch (error) {
       console.log("getColaborador: ", error);
@@ -120,6 +123,7 @@ export default function LayoutTextFields() {
 
         <Grid item xs={6}>
           <TextField
+            name="nome"
             style={{width:"100%"}}
             label="Nome"
             id="outlined-margin-none"
@@ -133,6 +137,7 @@ export default function LayoutTextFields() {
 
         <Grid item xs={12}>
           <TextField
+            name="email"
             style={{width:"100%"}}
             label="Email"
             id="outlined"
@@ -150,6 +155,7 @@ export default function LayoutTextFields() {
         
         <Grid item xs={2}>
           <TextField
+            name="dias"
             style={{width:"100%"}}
             id="outlined-number"
             label= "Dias"
@@ -171,6 +177,7 @@ export default function LayoutTextFields() {
 
         <Grid item xs={5}>
           <TextField
+          name="inicio"
           style={{width:"100%"}}
           id="outlined-date"
           label="Início das Férias"
@@ -186,6 +193,7 @@ export default function LayoutTextFields() {
 
         <Grid item xs={5}>
           <TextField
+            name="fim"
             style={{width:"100%"}}
             id="outlined-date"
             label="Fim das Férias"

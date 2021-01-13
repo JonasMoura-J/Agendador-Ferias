@@ -2,8 +2,9 @@ package br.com.alterdata.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -43,18 +44,24 @@ public class Colaborador implements Serializable{
 	private String departamento;
 	
 	@NotNull
+	private LocalDate aniversarioDataContratacao = dataAdmissao;
+	
+	@NotNull
 	@Enumerated(value = EnumType.STRING)
 	private Funcao funcao;
 
 	@ElementCollection(targetClass=Ferias.class)
-	private Set<Ferias> ferias = new HashSet<>();
+	private List<Ferias> ferias = new ArrayList<>();
 
 	public Colaborador() {
 		
 	}
 
+	
+
 	public Colaborador(long id, @NotNull String login, @NotNull String nome, @NotNull String email,
-			@NotNull LocalDate dataAdmissao, @NotNull String departamento, @NotNull Funcao funcao, Set<Ferias> ferias) {
+			@NotNull LocalDate dataAdmissao, @NotNull String departamento,
+			@NotNull LocalDate aniversarioDataContratacao, @NotNull Funcao funcao, List<Ferias> ferias) {
 		super();
 		this.id = id;
 		this.login = login;
@@ -62,9 +69,12 @@ public class Colaborador implements Serializable{
 		this.email = email;
 		this.dataAdmissao = dataAdmissao;
 		this.departamento = departamento;
+		this.aniversarioDataContratacao = aniversarioDataContratacao;
 		this.funcao = funcao;
 		this.ferias = ferias;
 	}
+
+
 
 	public long getId() {
 		return id;
@@ -122,12 +132,43 @@ public class Colaborador implements Serializable{
 		this.funcao = funcao;
 	}
 
-	public Set<Ferias> getFerias() {
+	public List<Ferias> getFerias() {
 		return ferias;
 	}
 
-	public void setFerias(Set<Ferias> ferias) {
+	public void setFerias(List<Ferias> ferias) {
 		this.ferias = ferias;
 	}
-	
+
+	public LocalDate getAniversarioDataContratacao() {
+		return aniversarioDataContratacao;
+	}
+
+	public void setAniversarioDataContratacao(LocalDate aniversarioDataContratacao) {
+		this.aniversarioDataContratacao = aniversarioDataContratacao;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Colaborador other = (Colaborador) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+
 }

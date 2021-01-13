@@ -1,7 +1,9 @@
 package br.com.alterdata.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
@@ -22,7 +24,7 @@ public class ColaboradorDTO implements Serializable{
 	private String email;
 	
 	@ElementCollection(targetClass=Ferias.class)
-	private Set<Ferias> ferias = new HashSet<>();
+	private List<Ferias> ferias = new ArrayList<>();
 	
 	@SuppressWarnings("unused")
 	private ColaboradorDTO() {
@@ -70,11 +72,11 @@ public class ColaboradorDTO implements Serializable{
 		this.email = email;
 	}
 
-	public Set<Ferias> getFerias() {
+	public List<Ferias> getFerias() {
 		return ferias;
 	}
 
-	public void setFerias(Set<Ferias> ferias) {
+	public void setFerias(List<Ferias> ferias) {
 		this.ferias = ferias;
 	}
 

@@ -81,11 +81,9 @@ public class FeriasController {
 	public ResponseEntity<Ferias> postFerias(@RequestBody FeriasRequestDTO dto) {
 
 		Ferias ferias = dto.toFerias(colaboradorRepository);
-		
 		Ferias valida = feriasRepository.findById(ferias.getId());
 		
 		if (valida == null) {
-				
 				Colaborador colaborador = colaboradorRepository.findByLogin(dto.getLogin());
 				colaborador.getFerias().add(ferias);
 				

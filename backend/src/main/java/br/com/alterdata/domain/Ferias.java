@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="TB_FERIAS")
-public class Ferias implements Serializable{
+public class Ferias implements Serializable, Comparable<Ferias>{
 
 	private static final long serialVersionUID = 1L;
 
@@ -98,7 +98,9 @@ public class Ferias implements Serializable{
 		this.colaborador = colaborador;
 	}
 
-	public boolean EhValido() {
-		return colaborador.getDataAdmissao().getMonthValue() < LocalDate.now().getMonthValue()? true : false;
+	@Override
+	public int compareTo(Ferias o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
