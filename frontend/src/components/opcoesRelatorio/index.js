@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {TextField, Grid} from '@material-ui/core';
 
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
@@ -7,19 +6,7 @@ import TableChartIcon from '@material-ui/icons/TableChart';
 
 import {Content, Button} from "./style";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-}));
-
 const OpcoesRelatorios = () => {
-  const classes = useStyles();
 
   return (
     <Content>

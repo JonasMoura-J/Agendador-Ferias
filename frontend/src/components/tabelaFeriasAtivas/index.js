@@ -1,4 +1,4 @@
-import {React, useState, useCallback, useEffect} from 'react';
+import {React, useState} from 'react';
 
 import {
   Table,
@@ -9,13 +9,10 @@ import {
   TablePagination,
   TableHead,
   makeStyles,
-  Paper,
-  Grid
+  Paper
 } from '@material-ui/core';
 
-import {Container, Button} from './style';
-
-import api from '../../services/api';
+import {Container} from './style';
 
 const TabelaFeriasAtivas = ({feriasAtivas}) => {
 

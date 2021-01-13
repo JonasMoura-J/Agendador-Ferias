@@ -9,7 +9,9 @@ const NotFound = () => {
     return(
         <Container>
             <Content>
-                <img src={logoAzul} style={{cursor: 'pointer'}} onClick={() => history.push('/')}></img>
+                <img src={logoAzul} style={{cursor: 'pointer'}} 
+                    onClick={() => history.push('/')} alt='Logo da Alterdata'>
+                </img>
                 <p><b>404</b> Isso é um erro!</p>
                 <p>O caminho da URL digitado não existe!</p>
             </Content>

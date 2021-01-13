@@ -4,7 +4,6 @@ import objetos from '../../json/objetos.json'
 import {Content, Button} from './style.js'
 
 import {
-    makeStyles,
     TextField,
     Grid,
   } from "@material-ui/core";
@@ -62,7 +61,7 @@ const InputRegistros = ({getFeriasAtivas}) => {
                 <TextField
                     style={{width:"100%"}}
                     size="small"
-                    id="outlined-number"
+                    id="outlined-search"
                     label= "Função"
                     select
                     InputLabelProps={{
@@ -100,8 +99,8 @@ const InputRegistros = ({getFeriasAtivas}) => {
                     defaultValue={new Date().getMonth()}
                     onChange = {e => setMes(e.target.value)}
                 >
-                    {meses.map(l => (
-                        <option key={l}>{l}</option>
+                    {lista.meses.map(l => (
+                        <option key={l.id}>{l.mes}</option>
                     ))}
                 </TextField>
                 </Grid>
@@ -110,7 +109,7 @@ const InputRegistros = ({getFeriasAtivas}) => {
                 <TextField
                     size="small"
                     style={{width:"100%"}}
-                    id="outlined-number"
+                    id="outlined-year"
                     label= "Ano"
                     select
                     InputLabelProps={{

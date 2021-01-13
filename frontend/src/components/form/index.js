@@ -1,19 +1,15 @@
-import React, { useState, useCallBack, useEffect } from "react";
+import React, {useState} from "react";
 import {
-  makeStyles,
-  Divider,
   TextField,
-  InputAdornment,
   Grid,
 } from "@material-ui/core";
 
-import emailjs from 'emailjs-com';
 import api from '../../services/api';
 
 import {Content, Button} from "./style.js";
 import '../../index.css'
 
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import SearchIcon from "@material-ui/icons/Search";
@@ -26,20 +22,7 @@ export default function LayoutTextFields() {
   const[inicio, setInicio] = useState("");
   const[fim, setFim] = useState("");
 
-  const[colaboradores, setColaboradores] = useState([])
   const[dadosColaborador, setDadosColaborador] = useState({})
-
-  function sendEmail(e) {
-    e.preventDefault();
-
-    emailjs.sendForm('gmail', 'template_0n31h1k', e.target, 'user_6Wf2CL2KUCH1pl77JfkY7')
-      .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
-      e.target.reset()
-  }
 
   const CadastrarFerias = async() =>{
     const params = {
@@ -51,19 +34,9 @@ export default function LayoutTextFields() {
     try {
       await api.post("ferias", params);
       alert('Férias registrada com sucesso!', 'success')
-      sendEmail()
       
     } catch (error) {
       alert('Erro ao registrar férias!', 'error')
-    }
-  }
-
-  const GetColaboradores = async() =>{
-    try {
-      const response = await api.get("colaboradores");
-      setColaboradores(response.data)
-    } catch (error) {
-      console.log("getColaboradores: ", error);
     }
   }
 
@@ -77,10 +50,6 @@ export default function LayoutTextFields() {
       console.log("getColaborador: ", error);
     }
   }
-
-  useEffect(() => {
-    GetColaboradores()
-  },[])
 
   const alert = (mensagem, tipo) => {
     toast(
@@ -123,7 +92,6 @@ export default function LayoutTextFields() {
 
         <Grid item xs={6}>
           <TextField
-            name="nome"
             style={{width:"100%"}}
             label="Nome"
             id="outlined-margin-none"
@@ -137,10 +105,9 @@ export default function LayoutTextFields() {
 
         <Grid item xs={12}>
           <TextField
-            name="email"
             style={{width:"100%"}}
             label="Email"
-            id="outlined"
+            id="outlined-email"
             fullWidth
             type = "email"
             variant="outlined"
@@ -153,12 +120,11 @@ export default function LayoutTextFields() {
           />
         </Grid>
         
-        <Grid item xs={2}>
+        <Grid item xs={4}>
           <TextField
-            name="dias"
             style={{width:"100%"}}
             id="outlined-number"
-            label= "Dias"
+            label= "Duração"
             select
             InputLabelProps={{
               shrink: true,
@@ -175,9 +141,8 @@ export default function LayoutTextFields() {
           </TextField>
         </Grid>
 
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <TextField
-          name="inicio"
           style={{width:"100%"}}
           id="outlined-date"
           label="Início das Férias"
@@ -191,11 +156,10 @@ export default function LayoutTextFields() {
           />
         </Grid>
 
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <TextField
-            name="fim"
             style={{width:"100%"}}
-            id="outlined-date"
+            id="outlined-date-end"
             label="Fim das Férias"
             type="date"
             InputLabelProps={{
