@@ -11,8 +11,11 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import api from '../../services/api';
 
-import { Content, Button, ContainerGrid } from "./style.js";
+import {Content, Button} from "./style.js";
 import '../../index.css'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -37,9 +40,11 @@ export default function LayoutTextFields() {
     }
     try {
       await api.post("ferias", params);
+      alert('Férias registrada com sucesso!', 'success')
       
     } catch (error) {
       console.log("Erro no Cadastro");
+      alert('Erro ao registrar férias!', 'error')
     }
   }
 
@@ -74,6 +79,12 @@ export default function LayoutTextFields() {
     GetColaboradores()
   },[])
 
+  const alert = (mensagem, tipo) => {
+    toast(
+        mensagem,
+        {type: tipo}
+    );
+  }
 
   return (
     <Content>
@@ -192,6 +203,7 @@ export default function LayoutTextFields() {
           <Button style={{fontSize:"1rem"}} onClick={CadastrarFerias}>Finalizar</Button>
         </Grid>
       </Grid>
+      <ToastContainer />
     </Content>
   );
 }
