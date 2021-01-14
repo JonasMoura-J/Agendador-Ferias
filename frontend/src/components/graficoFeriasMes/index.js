@@ -43,7 +43,7 @@ const GraficoFeriasMes = () => {
                 },
                 title: {
                     display: true,
-                    text: `Cadastros dos ultimos dias`,
+                    text: 'Registros por mês',
                     fontSize: 20
                 },
                 legend: {
