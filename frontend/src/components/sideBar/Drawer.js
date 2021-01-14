@@ -19,6 +19,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 import logo from '../../assets/imagens/logo.png'
 import miniLogo from '../../assets/imagens/miniLogo.png'
@@ -144,12 +145,15 @@ export default function MiniDrawer() {
                     </img>}
                 <Divider />
                 <List>
-                    
                     <ListItem button key="Dashboard" onClick={() => history.push('/')}>
+                        <ListItemIcon><DashboardIcon style={{ color: '#eee' }} /></ListItemIcon>
+                        <ListItemText primary="Dashboard" />
+                    </ListItem>
+                    
+                    <ListItem button key="Cadastro" onClick={() => history.push('/registro')}>
                         <ListItemIcon> <AccountCircleIcon style={{ color: '#eee' }} /></ListItemIcon>
                         <ListItemText primary="Cadastrar Férias" />
                     </ListItem>
-
 
                     <ListItem button key="Ferias Ativas" onClick={() => history.push('/ativas')}>
                         <ListItemIcon><CheckCircleOutlineIcon style={{ color: '#eee' }} /></ListItemIcon>

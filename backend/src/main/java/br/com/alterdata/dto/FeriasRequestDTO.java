@@ -48,7 +48,7 @@ public class FeriasRequestDTO {
 		Collections.sort(c.getFerias());
 		
 		if(dias+1 == this.duracao) {
-			if(meses > 12 && meses < 24) {
+			if(meses >= 12 && meses < 24) {
 				if(c.getFerias().isEmpty()) {
 					Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, c);
 					if(this.duracao == 30) {
@@ -83,7 +83,7 @@ public class FeriasRequestDTO {
 					if(this.getDuracao() == 30) {
 						Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, c);
 						c.setAniversarioDataContratacao(c.getAniversarioDataContratacao().plusYears(1));
-						return ferias; 
+						return ferias;  
 					}else if(this.getDuracao() == 15) {
 						LocalDate ultimaFerias = c.getFerias().get(c.getFerias().size()-1).getDataInicio();
 						LocalDate periodoUltimaFerias = LocalDate.of(ultimaFerias.getYear(),
