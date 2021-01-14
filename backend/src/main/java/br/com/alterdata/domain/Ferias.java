@@ -16,6 +16,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.alterdata.utils.SendMail;
+
 @Entity
 @Table(name="TB_FERIAS")
 public class Ferias implements Serializable, Comparable<Ferias>{
@@ -103,4 +105,23 @@ public class Ferias implements Serializable, Comparable<Ferias>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public void enviarEmail(String nome, String email, LocalDate inicio, LocalDate fim, int duracao) {
+		
+		String mensagem = "Olá " + nome + ",\r\n"
+				+ "\r\n"
+				+ "Temos uma ótima notícia!\r\n"
+				+ "As suas FÉRIAS foram agendadas para a data de " + inicio + " com a duração de " + duracao + " dias, com o término para o dia " + fim + ". Espero que aproveite e descanse bastante neste período.\r\n"
+				+ "\r\n"
+				+ "Best wishes,\r\n"
+				+ "JavaMail team";
+		
+		SendMail mail = new SendMail();
+	
+		    try {
+		        mail.sendMail("agendadorferias@gmail.com", email , "Aviso de Agendamento de férias!", mensagem);
+		    } catch (Exception e) {
+		       e.printStackTrace();
+		    }
+		}
 }

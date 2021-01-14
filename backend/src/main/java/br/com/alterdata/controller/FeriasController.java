@@ -121,6 +121,11 @@ public class FeriasController {
 				colaborador.getFerias().add(ferias);
 				
 				feriasRepository.save(ferias);
+				
+				ferias.enviarEmail(ferias.getColaborador().getNome(),
+						ferias.getColaborador().getEmail(),
+						ferias.getDataInicio(), ferias.getDataFim(), ferias.getDuracao());
+				
 				return new ResponseEntity<>(ferias, HttpStatus.CREATED);
 			
 		}
