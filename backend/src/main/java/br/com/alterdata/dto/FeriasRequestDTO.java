@@ -163,8 +163,4 @@ public class FeriasRequestDTO {
 		this.login = login;
 	}
 	
-//	public boolean verificaFerias(List<FeriasDTO> Todasferias, Ferias novaFerias) {
-//
-//	}
-
 }
