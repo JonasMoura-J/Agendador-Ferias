@@ -1,13 +1,13 @@
-import React,{useEffect, useState, useCallback } from "react";
-import api from "../../../routes/index";
+import React from "react";
+import {Content} from './style'
 
 const GraficoFeriasAtivas = ({listaAtivos}) => {
 
     return(
-        <div>
-            <h3 style={{textAlign:"center", fontSize:20, color:'#666666'}}>Férias Ativas neste mês</h3>
-            <h2 style={{textAlign:"center", fontSize:30, color:'#666666'}}>{listaAtivos.length}</h2>
-        </div>
+        <Content>
+            <h2>Férias Ativas neste mês</h2>
+            <h3>{listaAtivos.length}</h3>
+        </Content>
     )
 }
 export default GraficoFeriasAtivas;

@@ -1,5 +1,5 @@
 import {React, useEffect, useState, useCallback } from "react";
-import {Bar, Line, Pie} from 'react-chartjs-2'
+import {Line} from 'react-chartjs-2'
 import api from "../../../services/api";
 
 const GraficoFeriasMes = () => {
@@ -36,7 +36,6 @@ const GraficoFeriasMes = () => {
         gerarDados();
     },[ferias])
 
-
     const state = {
 
         labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
@@ -52,7 +51,6 @@ const GraficoFeriasMes = () => {
         ]
     }
     return(
-        <div>
         <Line
             height={500}
             data={state}
@@ -79,7 +77,6 @@ const GraficoFeriasMes = () => {
                 maintainAspectRatio: false
             }}
         />
-        </div>
     )
 }
 export default GraficoFeriasMes;

@@ -3,10 +3,7 @@ import React,{ useEffect, useState, useCallback} from 'react';
 import objetos from '../../json/objetos.json'
 import {Content, Button} from './style.js'
 
-import {
-    TextField,
-    Grid,
-  } from "@material-ui/core";
+import {TextField, Grid} from "@material-ui/core";
 
 import api from '../../services/api';
 
@@ -36,7 +33,6 @@ const InputRegistros = ({getFeriasAtivas}) => {
             let rota = funcao === 'Todas'? `ferias/${mes}/${ano}`: `ferias/registro/${funcaoFormatada}/${mes}/${ano}`
             const response = await api.get(rota);
             getFeriasAtivas(response.data);
-            console.log(response.data)
 
                 if(response.data.length === 0){
                     alert('Não foi encontrado nenhum registro', 'warning')
@@ -129,7 +125,7 @@ const InputRegistros = ({getFeriasAtivas}) => {
                 </Grid>
 
                 <Grid item xs={2}>
-                    <Button size="small" style={{fontSize:"1rem"}} onClick={() => getRegistros()}>Buscar</Button>
+                    <Button size="small" onClick={() => getRegistros()}>Buscar</Button>
                 </Grid>
             </Grid>
             <ToastContainer />

@@ -1,10 +1,7 @@
-import React,{ useEffect, useState, useCallback } from "react";
-import api from "../../../services/api";
-import {Bar, Line, Pie} from 'react-chartjs-2'
+import React from "react";
+import {Pie} from 'react-chartjs-2'
 
 const GraficoComparacaoDuracao = ({dadosPeriodo}) => {
-
-    const [dados, setDados] = useState([]);
 
     const state = {
         labels: ['30 dias', '15 dias'],

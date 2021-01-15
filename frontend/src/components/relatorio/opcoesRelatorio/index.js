@@ -30,7 +30,7 @@ const OpcoesRelatorios = () => {
 
     useEffect(() => {
       getAllTickets();
-    }, [mes, ano]);
+    },[getAllTickets]);
 
   return (
     <Content>
@@ -83,11 +83,11 @@ const OpcoesRelatorios = () => {
           </Grid>
 
           <Grid item xs={6}>
-              <Button style={{backgroundColor:"#c74c4a", width:"100%"}} onClick={() => generatePDF(tickets)}>Gerar PDF <PictureAsPdfIcon fontSize = 'small'/></Button>
+              <Button style={{backgroundColor:"#c74c4a"}} onClick={() => generatePDF(tickets)}>Gerar PDF <PictureAsPdfIcon fontSize = 'small'/></Button>
           </Grid>
 
           <Grid item xs={6}>
-              <Button style={{backgroundColor:"#1f6f45", width:"100%"}}>Gerar xls <TableChartIcon fontSize = 'small'/></Button>
+              <Button style={{backgroundColor:"#1f6f45"}}>Gerar xls <TableChartIcon fontSize = 'small'/></Button>
           </Grid>
         </Grid>
     </Content>

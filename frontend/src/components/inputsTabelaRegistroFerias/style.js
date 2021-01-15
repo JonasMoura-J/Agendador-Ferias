@@ -19,6 +19,7 @@ export const Button = styled.button`
     border-radius: 5px;
     outline: none;
     transition: .1s;
+    font-size:1rem;
     cursor: pointer;  
     &:hover {
         opacity: .8;
