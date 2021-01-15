@@ -2,7 +2,6 @@ package br.com.alterdata.dto;
 
 import java.time.LocalDate;
 
-import br.com.alterdata.domain.Colaborador;
 import br.com.alterdata.domain.Ferias;
 
 public class FeriasResponseDTO {

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
-import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpServerErrorException;

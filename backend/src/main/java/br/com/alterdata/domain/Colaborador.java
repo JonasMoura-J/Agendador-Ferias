@@ -3,7 +3,6 @@ package br.com.alterdata.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
