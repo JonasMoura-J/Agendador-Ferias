@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from "react";
-import api from "../../services/api";
+import React,{ useEffect, useState, useCallback } from "react";
+import api from "../../../services/api";
 import {Bar, Line, Pie} from 'react-chartjs-2'
 
-const GraficoComparacaoDuracao = () => {
+const GraficoComparacaoDuracao = ({dadosPeriodo}) => {
 
     const [dados, setDados] = useState([]);
 
@@ -21,26 +21,10 @@ const GraficoComparacaoDuracao = () => {
                     '#c21618',
 
                 ],
-                data: dados
+                data: dadosPeriodo
             }
         ]
     }
-
-    const GetFeriasPorDuracao = async() =>{
-        try {
-            const response30 = await api.get(`ferias/${30}`);
-            const response15 = await api.get(`ferias/${15}`);
-
-            setDados([1, 6])
-
-            console.log(dados)
-            } catch (error) {
-            console.log("getColaboradores: ", error);
-        }
-    }
-    useEffect(() => {
-        GetFeriasPorDuracao()
-    },[])
 
     return (
         <Pie

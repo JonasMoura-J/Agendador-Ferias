@@ -76,15 +76,15 @@ public class FeriasController {
 		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
 	}
 	
-	@GetMapping("ferias/{mesinicio}/{mesFim}/{ano}")
-	public ResponseEntity <List<FeriasDTO>> listarPorPeriodoOsAtivos(@PathVariable int mesinicio, @PathVariable int mesFim, @PathVariable int ano) {
+	@GetMapping("ferias/ano/{ano}")
+	public ResponseEntity <List<FeriasDTO>> listarPorAno(@PathVariable int ano) {
 
 		List<Ferias> ferias = feriasRepository.findAll();
 		
 		List<Ferias> feriasPorPeriodo = new ArrayList<>();
 		
 		for (Ferias f : ferias) {
-			if((f.getDataInicio().getMonthValue()== mesinicio || f.getDataFim().getMonthValue()== mesFim) && f.getDataInicio().getYear() == ano) {
+			if(f.getDataInicio().getYear() == ano) {
 				feriasPorPeriodo.add(f);
 			}
 		}
@@ -93,7 +93,24 @@ public class FeriasController {
 		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
 	}
 	
-	@GetMapping("ferias/{funcao}/{mes}/{ano}")
+	@GetMapping("ferias/{mesinicio}/{mesFim}/{ano}")
+	public ResponseEntity <List<FeriasDTO>> listarPorPeriodoOsAtivos(@PathVariable int mesinicio, @PathVariable int mesFim, @PathVariable int ano) {
+
+		List<Ferias> ferias = feriasRepository.findAll();
+		
+		List<Ferias> feriasPorPeriodo = new ArrayList<>();
+		
+ 		for (Ferias f : ferias) {
+			if((f.getDataInicio().getMonthValue() == mesinicio || f.getDataFim().getMonthValue()== mesFim) && f.getDataInicio().getYear() == ano) {
+				feriasPorPeriodo.add(f);
+			}
+		}
+		List<FeriasDTO> feriasDTO = feriasPorPeriodo.stream().map(x -> new FeriasDTO(x)).collect(Collectors.toList());
+		
+		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
+	}
+	
+	@GetMapping("ferias/registro/{funcao}/{mes}/{ano}")
 	public ResponseEntity <List<FeriasDTO>> listarPorFucaoEPeriodo(@PathVariable Funcao funcao, @PathVariable int mes,  @PathVariable int ano) {
 
 		List<Ferias> ferias = feriasRepository.findAll();

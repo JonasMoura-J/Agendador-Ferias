@@ -1,5 +1,5 @@
 import React from "react";
-import OpcoesRelatorio from "../../components/opcoesRelatorio/";
+import OpcoesRelatorio from "../../components/relatorio/opcoesRelatorio";
 import Drawer from "../../components/sideBar/Drawer";
 import {Content, Container} from "./style";
 

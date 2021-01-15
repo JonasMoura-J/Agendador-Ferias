@@ -1,4 +1,4 @@
-import {React, useEffect, useState, useCallback} from 'react';
+import React,{ useEffect, useState, useCallback} from 'react';
 
 import objetos from '../../json/objetos.json'
 import {Content, Button} from './style.js'
@@ -20,7 +20,6 @@ const InputRegistros = ({getFeriasAtivas}) => {
             {type: tipo}
         );
     }
-
     const [lista] = useState(objetos);
 
     const meses = Array.from(Array(12), (_, i) => i+1)
@@ -34,7 +33,7 @@ const InputRegistros = ({getFeriasAtivas}) => {
         const funcaoFormatada = semEspacos.toUpperCase();
 
         try {
-            let rota = funcao === 'Todas'? `ferias/${mes}/${ano}`: `ferias/${funcaoFormatada}/${mes}/${ano}`
+            let rota = funcao === 'Todas'? `ferias/${mes}/${ano}`: `ferias/registro/${funcaoFormatada}/${mes}/${ano}`
             const response = await api.get(rota);
             getFeriasAtivas(response.data);
             console.log(response.data)

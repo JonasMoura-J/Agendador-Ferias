@@ -1,23 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Drawer from "../../components/sideBar/Drawer";
-import GraficoFeriasMes from "../../components/graficoFeriasMes";
+import GraficoFeriasMes from "../../components/graficos/graficoFeriasMes";
 import Paper from '@material-ui/core/Paper';
 import {Content, Container} from "./style";
-import GraficoFeriasAtivas from "../../components/graficoFeriasAtivas";
+import GraficoFeriasAtivas from "../../components/graficos/graficoFeriasAtivas";
 import { Grid } from "@material-ui/core";
-import GraficoComparacaoDuracao from "../../components/graficoComparacaoDuracao";
+import GraficoComparacaoDuracao from "../../components/graficos/graficoComparacaoDuracao";
+import api from "../../services/api";
 
 
 const Dashboard = () => {
 
-  const customStyles = {
-    control: base => ({
-        ...base,
-        height: 35,
-        minHeight: 35,
-        width: 130,
-    })
-  };  
+  const[listaAtivos, setListaAtivos] = useState([]);
+  const [dadosPeriodo, setDadosPeriodo] = useState([]);
+    
+    const GetRegistrosAtivos = async() =>{
+        const mesInicio = new Date().getMonth()+1;
+        const mesFim = new Date().getMonth()+1;
+        const anoAtual = new Date().getFullYear();
+        try {
+            const response = await api.get(`ferias/${mesInicio}/${mesFim}/${anoAtual}`);
+            setListaAtivos(response.data)         
+          
+        } catch (error) {
+        }
+    }
+
+    const GetFeriasPorDuracao = async() =>{
+      try {
+          const response30 = await api.get(`ferias/${30}`);
+          const response15 = await api.get(`ferias/${15}`);
+
+          setDadosPeriodo([response30.data.length, response15.data.length])
+
+      } catch (error) {
+      console.log("getFerias: ", error);
+      }
+    }
+
+    useEffect(() => {
+      GetRegistrosAtivos();
+      GetFeriasPorDuracao();
+  }, [])
 
   return (
     <Container>
@@ -51,7 +75,7 @@ const Dashboard = () => {
                             minWidth: 100,
                             minHeight: 330
                         }}>
-                          <GraficoComparacaoDuracao/>
+                          <GraficoComparacaoDuracao dadosPeriodo={dadosPeriodo}/>
                         </Paper>
 
                         <Paper style={{
@@ -63,8 +87,8 @@ const Dashboard = () => {
                             minWidth: 100,
                             minHeight: 100
                         }}>
-                          <GraficoFeriasAtivas/>
-                          </Paper>
+                          <GraficoFeriasAtivas listaAtivos={listaAtivos}/>
+                        </Paper>
                     </Grid>
                 </Grid>
             </div>
