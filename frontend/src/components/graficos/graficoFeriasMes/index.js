@@ -41,12 +41,15 @@ const GraficoFeriasMes = () => {
         labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
         datasets: [
             {
-                label: "Exemplo",
+                label: "Cadastros de férias",
                 data: dados,
-                bordeWidth: 6,
-                borderColor: 'rgba(77, 166, 253, 0.85)',
-                backgroundColor: 'transparent',
-                fill: false
+                bordeWidth: 2,
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)"
             }
         ]
     }
@@ -67,7 +70,7 @@ const GraficoFeriasMes = () => {
                 },
                 title: {
                     display: true,
-                    text: 'Registros por mês',
+                    text: 'Cadastros por mês',
                     fontSize: 20
                 },
                 legend: {

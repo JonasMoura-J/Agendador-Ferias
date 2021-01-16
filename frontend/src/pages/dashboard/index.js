@@ -50,17 +50,15 @@ const Dashboard = () => {
           <h1>Dashboard</h1>
 
             <div style={{ display: 'flex', width: '90%', flexWrap: 'wrap', flexDirection: 'row' }}>
-                <Grid container spacing={4}>
+                <Grid container spacing={6}>
                     <Grid item xs={8}>
                       <Paper style={{
                           marginBottom: 50,
                           padding: 10,
-                          marginRight: 20,
                           flexGrow: 1,
                           flex: 3,
                           minWidth: 200,
                           minHeight: 150,
-
                       }}>
                         <GraficoFeriasMes/>
                       </Paper>

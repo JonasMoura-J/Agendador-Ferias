@@ -4,15 +4,15 @@ export const Container = styled.div`
     display: flex;
     flex: 1;
     flex-direction:row;
-    height: 100%;
 `;
 
 export const Content = styled.div`
-    display: flex;
-    flex:1;
+    display:flex;
+    flex: 1;
+    flex-direction:column;
+    justify-content: center;
     align-items:center;
-    justify-content:center;
-    flex-direction: column;
+    padding-top:25px;
 
     h1 {
         font-size: 50px;

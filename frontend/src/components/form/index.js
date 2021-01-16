@@ -57,6 +57,7 @@ export default function LayoutTextFields() {
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))+1;
 
     if(diffDays !== parseInt(params.duracao)){
+      console.log(diffDays, parseInt(params.duracao))
       alert('A duração entre a data de inicio e a data fim não condizem com a duração', 'error')
       return
     }
