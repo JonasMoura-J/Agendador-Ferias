@@ -14,7 +14,7 @@ import {
 
 import {Container} from './style';
 
-const TabelaFeriasAtivas = ({feriasAtivas}) => {
+const TabelaFerias = ({registroFerias}) => {
 
   const styles = useStyles();
   const [page, setPage] = useState(0);
@@ -49,8 +49,8 @@ const TabelaFeriasAtivas = ({feriasAtivas}) => {
                 <TableBody>
 
                   {
-                    feriasAtivas&&
-                    feriasAtivas.map(ferias => {
+                    registroFerias&&
+                    registroFerias.map(ferias => {
                       return (
                         <>
                           <TableRow hover key={ferias.id}>
@@ -82,7 +82,7 @@ const TabelaFeriasAtivas = ({feriasAtivas}) => {
       </>
   );
 }
-export default TabelaFeriasAtivas;
+export default TabelaFerias;
 
 const useStyles = makeStyles({
   root: {

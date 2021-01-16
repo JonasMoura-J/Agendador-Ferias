@@ -1,7 +1,7 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
-import FeriasAtivas from '../pages/feriasAtivas'
-import Registro from '../pages/registro/index'
+import Registro from '../pages/registros'
+import Cadastro from '../pages/cadastro/index'
 import NotFound from '../pages/notFound'
 import Relatorio from '../pages/relatorio'
 import Dashboard from '../pages/dashboard'
@@ -12,9 +12,9 @@ const Routes = () => {
     return(
         <Switch>
             <Route path='/' component={Dashboard} exact/>
-            <Route path='/registro' component={Registro} exact/>
+            <Route path='/cadastro' component={Cadastro} exact/>
             <Route path='/relatorio' component={Relatorio}/>
-            <Route path='/ativas' component={FeriasAtivas}/>
+            <Route path='/registro' component={Registro}/>
             <Route path='*/' component={NotFound}/>
         </Switch>
     )

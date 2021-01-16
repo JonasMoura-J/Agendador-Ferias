@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import Drawer from "../../components/sideBar/Drawer";
 import {Content, Container} from "./style";
-import TabelaFeriasAtivas from "../../components/tabelaFeriasAtivas";
+import TabelaFerias from "../../components/tabelaFerias";
 import Input from "../../components/inputsTabelaRegistroFerias";
 
 const FeriasAtivas = () => {
 
 
-  const[feriasAtivas, setFeriasAtivas] = useState();
+  const[registroFerias, setRegistroFerias] = useState();
 
-  const getFeriasAtivas = (ferias) => {
-    return setFeriasAtivas(ferias);
+  const getFerias = (ferias) => {
+    return setRegistroFerias(ferias);
   }
   return (
     <Container>
       <Drawer />
         <Content>
           <h1>Buscar registro de férias</h1>
-          <Input getFeriasAtivas={getFeriasAtivas}/>
-          <TabelaFeriasAtivas feriasAtivas = {feriasAtivas}/>
+          <Input getFerias={getFerias}/>
+          <TabelaFerias registroFerias = {registroFerias}/>
         </Content>
       </Container>
  

@@ -10,7 +10,7 @@ import api from '../../services/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const InputRegistros = ({getFeriasAtivas}) => {
+const InputRegistros = ({getFerias}) => {
     const alert = (mensagem, tipo) => {
         toast(
             mensagem,
@@ -18,8 +18,6 @@ const InputRegistros = ({getFeriasAtivas}) => {
         );
     }
     const [lista] = useState(objetos);
-
-    const meses = Array.from(Array(12), (_, i) => i+1)
 
     const [funcao, setFuncao] = useState("Todas")
     const [mes, setMes] = useState(new Date().getMonth()+1)
@@ -32,7 +30,7 @@ const InputRegistros = ({getFeriasAtivas}) => {
         try {
             let rota = funcao === 'Todas'? `ferias/${mes}/${ano}`: `ferias/registro/${funcaoFormatada}/${mes}/${ano}`
             const response = await api.get(rota);
-            getFeriasAtivas(response.data);
+            getFerias(response.data);
 
                 if(response.data.length === 0){
                     alert('Não foi encontrado nenhum registro', 'warning')

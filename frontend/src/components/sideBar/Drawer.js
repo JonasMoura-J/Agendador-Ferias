@@ -17,8 +17,8 @@ import {
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import AssessmentIcon from '@material-ui/icons/Assessment';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 
 import logo from '../../assets/imagens/logo.png'
@@ -150,18 +150,18 @@ export default function MiniDrawer() {
                         <ListItemText primary="Dashboard" />
                     </ListItem>
                     
-                    <ListItem button key="Cadastro" onClick={() => history.push('/registro')}>
+                    <ListItem button key="Cadastro" onClick={() => history.push('/cadastro')}>
                         <ListItemIcon> <AccountCircleIcon style={{ color: '#eee' }} /></ListItemIcon>
                         <ListItemText primary="Cadastrar Férias" />
                     </ListItem>
 
-                    <ListItem button key="Ferias Ativas" onClick={() => history.push('/ativas')}>
-                        <ListItemIcon><CheckCircleOutlineIcon style={{ color: '#eee' }} /></ListItemIcon>
-                        <ListItemText primary="Férias Ativas"/>
+                    <ListItem button key="registros" onClick={() => history.push('/registro')}>
+                        <ListItemIcon><FindInPageIcon style={{ color: '#eee' }} /></ListItemIcon>
+                        <ListItemText primary="Registros de Férias"/>
                     </ListItem>
 
                     <ListItem button key="Relatorio" onClick={() => history.push('/relatorio')}>
-                        <ListItemIcon><AssessmentIcon style={{ color: '#eee' }} /></ListItemIcon>
+                        <ListItemIcon><PictureAsPdfIcon style={{ color: '#eee' }} /></ListItemIcon>
                         <ListItemText primary="Gerar Relatório" />
                     </ListItem>
                 </List>

@@ -4,7 +4,7 @@ import {TextField, Grid} from '@material-ui/core';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import TableChartIcon from '@material-ui/icons/TableChart';
 
-import {Content, Button} from "./style";
+import {Content, Button, Row} from "./style";
 import generatePDF from "../funcaoGerar";
 import api from '../../../services/api';
 
@@ -34,13 +34,10 @@ const OpcoesRelatorios = () => {
 
   return (
     <Content>
-      <Grid container spacing={4}>
-          <Grid item xs={12}>
-              <h3>Gerar no período de: </h3>
-          </Grid>
-          <Grid item xs={6}>
+      <h3>Gerar no período de: </h3>
+          <Row>
             <TextField
-              style={{width:"30%"}}
+              style={{width:"30%", margin:"0 1vw"}}
               id="outlined-number"
               select
               label="Mes"
@@ -58,11 +55,9 @@ const OpcoesRelatorios = () => {
                 <option key={l}>{l}</option>
               ))}
             </TextField> 
-          </Grid>
 
-          <Grid item xs={6}>
             <TextField
-              style={{width:"30%"}}
+              style={{width:"30%", margin:"0 1vw"}}
               id="outlined"
               select
               label="Ano"
@@ -80,16 +75,9 @@ const OpcoesRelatorios = () => {
                 <option key={l.id}>{l.ano}</option>
               ))}
             </TextField> 
-          </Grid>
+          </Row>
 
-          <Grid item xs={6}>
-              <Button style={{backgroundColor:"#c74c4a"}} onClick={() => generatePDF(tickets)}>Gerar PDF <PictureAsPdfIcon fontSize = 'small'/></Button>
-          </Grid>
-
-          <Grid item xs={6}>
-              <Button style={{backgroundColor:"#1f6f45"}}>Gerar xls <TableChartIcon fontSize = 'small'/></Button>
-          </Grid>
-        </Grid>
+        <Button style={{backgroundColor:"#c74c4a"}} onClick={() => generatePDF(tickets)}>Gerar PDF <PictureAsPdfIcon fontSize = 'small'/></Button>
     </Content>
   );
 }

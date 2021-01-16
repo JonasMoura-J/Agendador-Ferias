@@ -12,7 +12,7 @@ const Acesso = () => {
 
         <Content>
           
-          <h1>Registro de Férias</h1>
+          <h1>Cadastro de Férias</h1>
           
           <Form/>
         </Content>
