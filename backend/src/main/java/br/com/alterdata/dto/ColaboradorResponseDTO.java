@@ -19,6 +19,8 @@ public class ColaboradorResponseDTO implements Serializable{
 	
 	private LocalDate dataAdmissao;
 	
+	private LocalDate aniversarioDataContratacao;
+	
 	@SuppressWarnings("unused")
 	private ColaboradorResponseDTO() {
 		
@@ -31,6 +33,7 @@ public class ColaboradorResponseDTO implements Serializable{
 		this.nome = colaborador.getNome();
 		this.email = colaborador.getEmail();
 		this.dataAdmissao = colaborador.getDataAdmissao();
+		this.aniversarioDataContratacao = colaborador.getAniversarioDataContratacao();
 	}
 
 	public long getId() {
@@ -71,6 +74,14 @@ public class ColaboradorResponseDTO implements Serializable{
 
 	public void setDataAdmissao(LocalDate dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
+	}
+
+	public LocalDate getAniversarioDataContratacao() {
+		return aniversarioDataContratacao;
+	}
+
+	public void setAniversarioDataContratacao(LocalDate aniversarioDataContratacao) {
+		this.aniversarioDataContratacao = aniversarioDataContratacao;
 	}
 
 }
