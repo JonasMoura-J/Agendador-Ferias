@@ -24,7 +24,10 @@ public class ColaboradorController {
 	@GetMapping("/colaboradores")
 	public ResponseEntity <List<ColaboradorDTO>> buscarTodos() {
 		List<Colaborador> colaboradores = colaboradorRepository.findAll();
-		List<ColaboradorDTO> colaboradoresDTO = colaboradores.stream().map(x -> new ColaboradorDTO(x)).collect(Collectors.toList());
+		List<ColaboradorDTO> colaboradoresDTO = colaboradores
+				.stream()
+				.map(x -> new ColaboradorDTO(x))
+				.collect(Collectors.toList());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(colaboradoresDTO);
 	}
@@ -32,7 +35,10 @@ public class ColaboradorController {
 	@GetMapping("/colaboradoresSimples")
 	public ResponseEntity <List<ColaboradorResponseDTO>> buscarTodosObjSimplificado() {
 		List<Colaborador> colaboradores = colaboradorRepository.findAll();
-		List<ColaboradorResponseDTO> colaboradorResponseDTO = colaboradores.stream().map(x -> new ColaboradorResponseDTO(x)).collect(Collectors.toList());
+		List<ColaboradorResponseDTO> colaboradorResponseDTO = colaboradores
+				.stream()
+				.map(x -> new ColaboradorResponseDTO(x))
+				.collect(Collectors.toList());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(colaboradorResponseDTO);
 	}

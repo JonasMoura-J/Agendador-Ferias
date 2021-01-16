@@ -38,7 +38,10 @@ public class FeriasController {
 	@GetMapping("/ferias")
 	public ResponseEntity <List<FeriasResponseDTO>> findAll() {
 		List<Ferias> ferias = feriasRepository.findAll();
-		List<FeriasResponseDTO> feriasResponseDTO = ferias.stream().map(x -> new FeriasResponseDTO(x)).collect(Collectors.toList());
+		List<FeriasResponseDTO> feriasResponseDTO = ferias
+				.stream()
+				.map(x -> new FeriasResponseDTO(x))
+				.collect(Collectors.toList());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(feriasResponseDTO);
 	}
@@ -55,7 +58,11 @@ public class FeriasController {
 			}
 		}
 		
-		List<FeriasResponseDTO> feriasResponseDTO = feriasPorDuracao.stream().map(x -> new FeriasResponseDTO(x)).collect(Collectors.toList());
+		List<FeriasResponseDTO> feriasResponseDTO = feriasPorDuracao
+				.stream()
+				.map(x -> new FeriasResponseDTO(x))
+				.collect(Collectors.toList());
+		
 		return ResponseEntity.status(HttpStatus.OK).body(feriasResponseDTO);
 	}
 	
@@ -71,7 +78,10 @@ public class FeriasController {
 				feriasPorPeriodo.add(f);
 			}
 		}
-		List<FeriasDTO> feriasDTO = feriasPorPeriodo.stream().map(x -> new FeriasDTO(x)).collect(Collectors.toList());
+		List<FeriasDTO> feriasDTO = feriasPorPeriodo
+				.stream()
+				.map(x -> new FeriasDTO(x))
+				.collect(Collectors.toList());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
 	}
@@ -88,7 +98,10 @@ public class FeriasController {
 				feriasPorPeriodo.add(f);
 			}
 		}
-		List<FeriasDTO> feriasDTO = feriasPorPeriodo.stream().map(x -> new FeriasDTO(x)).collect(Collectors.toList());
+		List<FeriasDTO> feriasDTO = feriasPorPeriodo
+				.stream()
+				.map(x -> new FeriasDTO(x))
+				.collect(Collectors.toList());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
 	}
@@ -105,13 +118,17 @@ public class FeriasController {
 				feriasPorPeriodo.add(f);
 			}
 		}
-		List<FeriasDTO> feriasDTO = feriasPorPeriodo.stream().map(x -> new FeriasDTO(x)).collect(Collectors.toList());
+		List<FeriasDTO> feriasDTO = feriasPorPeriodo
+				.stream()
+				.map(x -> new FeriasDTO(x))
+				.collect(Collectors.toList());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
 	}
 	
 	@GetMapping("ferias/registro/{funcao}/{mes}/{ano}")
-	public ResponseEntity <List<FeriasDTO>> listarPorFucaoEPeriodo(@PathVariable Funcao funcao, @PathVariable int mes,  @PathVariable int ano) {
+	public ResponseEntity <List<FeriasDTO>> listarPorFucaoEPeriodo(@PathVariable Funcao funcao,
+			@PathVariable int mes, @PathVariable int ano) {
 
 		List<Ferias> ferias = feriasRepository.findAll();
 		
@@ -122,7 +139,10 @@ public class FeriasController {
 				feriasPorPeriodo.add(f);
 			}
 		}
-		List<FeriasDTO> feriasDTO = feriasPorPeriodo.stream().map(x -> new FeriasDTO(x)).collect(Collectors.toList());
+		List<FeriasDTO> feriasDTO = feriasPorPeriodo
+				.stream()
+				.map(x -> new FeriasDTO(x))
+				.collect(Collectors.toList());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(feriasDTO);
 	}

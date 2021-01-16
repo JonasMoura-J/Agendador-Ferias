@@ -26,99 +26,126 @@ public class FeriasRequestDTO {
 	
 	public Ferias toFerias(ColaboradorRepository repository) {
 
-		Colaborador colaborador = repository.findByLogin(login);
+		Colaborador contemColaborador = repository.findByLogin(login);
 		
-		if(colaborador == null) {
+		if (contemColaborador == null) {
 			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "O login não existe");
 		}
 		
-		//-----------------------------------------------------------------------------------------------------------------------
+		int periodo = Period.between(this.dataInicio,LocalDate.now()).getDays();
+
+		if (periodo <= 0) {
+
+			throw new HttpServerErrorException(HttpStatus.NOT_ACCEPTABLE,
+					"Não é possivel agendar férias para o dia atual ou em datas anteriores");
+		}
 		
-		Colaborador c = colaborador;
+		Colaborador colaborador = contemColaborador;
 		
-		LocalDate dataCadastro = LocalDate.of(this.dataInicio.getYear(), this.dataInicio.getMonth(), this.dataInicio.getDayOfMonth());
-		LocalDate dataFim = LocalDate.of(this.dataFim.getYear(), this.dataFim.getMonth(), this.dataFim.getDayOfMonth());			
-		long dias = dataCadastro.until(dataFim, ChronoUnit.DAYS);
+		LocalDate dataCadastro = LocalDate.of(this.dataInicio.getYear(),
+				this.dataInicio.getMonth(), this.dataInicio.getDayOfMonth());
 		
-		LocalDate admissao = LocalDate.of(c.getDataAdmissao().getYear(), c.getDataAdmissao().getMonth(), c.getDataAdmissao().getDayOfMonth());
+		LocalDate dataFim = LocalDate.of(this.dataFim.getYear(),
+				this.dataFim.getMonth(), this.dataFim.getDayOfMonth());
+		
+		long dias = dataCadastro.until(dataFim, ChronoUnit.DAYS)+1;
+		
+		LocalDate admissao = LocalDate.of(colaborador.getDataAdmissao().getYear(),
+				colaborador.getDataAdmissao().getMonth(), colaborador.getDataAdmissao().getDayOfMonth());
+		
 		long meses = admissao.until(dataCadastro, ChronoUnit.MONTHS);
 		
-//		Colaborador feriasSort = c.getFerias().sort(Comparator.comparing(Ferias::getId));
-		Collections.sort(c.getFerias());
+		Collections.sort(colaborador.getFerias());
 		
-		if(dias+1 == this.duracao) {
-			if(meses >= 12 && meses < 24) {
-				if(c.getFerias().isEmpty()) {
-					Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, c);
-					if(this.duracao == 30) {
-						c.setAniversarioDataContratacao(c.getDataAdmissao().plusYears(1));
+		if (dias == this.duracao) {
+			if (meses >= 12 && meses < 24) {
+				if (colaborador.getFerias().isEmpty()) {
+					Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, colaborador);
+					if (this.duracao == 30) {
+						colaborador.setAniversarioDataContratacao(colaborador.getDataAdmissao().plusYears(1));
 					}
 					return ferias;
 					
-				}else if(c.getFerias().size() == 1) {
-					int verificacao = Period.between(c.getFerias().get(c.getFerias().size()-1).getDataFim(), this.dataInicio).getDays();
-					if(c.getFerias().get(c.getFerias().size()-1).getDuracao() == 15 &&
-							this.duracao == 15 &&
-							verificacao >= 0) {
+				} else if (colaborador.getFerias().size() == 1) {
+					int verificacao = Period.between(colaborador.getFerias()
+							.get(colaborador.getFerias()
+							.size()-1)
+							.getDataFim(), this.dataInicio)
+							.getDays();
+					
+					if (colaborador.getFerias().get(colaborador.getFerias().size()-1).getDuracao() == 15
+							&& this.duracao == 15 
+							&& verificacao >= 0) {
 						
-						Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, c);
-						c.setAniversarioDataContratacao(c.getDataAdmissao().plusYears(1));
+						Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, colaborador);
+						
+						colaborador.setAniversarioDataContratacao(colaborador.getDataAdmissao().plusYears(1));
+						
 						return ferias;
-					}else {
-						throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Não pode cadastrar as férias no período de uma férias ativa");
+					} else {
+						throw new HttpServerErrorException(HttpStatus.BAD_REQUEST,
+								"Não pode cadastrar as férias no período de uma férias ativa");
 					}
-				}else {
-					throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "O Colaborador não possui férias disponiveis");
+				} else {
+					throw new HttpServerErrorException(HttpStatus.BAD_REQUEST,
+							"O Colaborador não possui férias disponiveis");
 				}
 				
-			}else if(meses > 24) {
-				LocalDate aniversario = LocalDate.of(c.getAniversarioDataContratacao().getYear(),
-						c.getAniversarioDataContratacao().getMonth(),
-						c.getAniversarioDataContratacao().getDayOfMonth());
+			}else if (meses > 24) {
+				LocalDate aniversario = LocalDate.of(colaborador.getAniversarioDataContratacao().getYear(),
+						colaborador.getAniversarioDataContratacao().getMonth(),
+						colaborador.getAniversarioDataContratacao().getDayOfMonth());
 				
 				long periodoMeses = aniversario.until(dataCadastro, ChronoUnit.MONTHS);
 				
-				if(periodoMeses >= 12) {
-					if(this.getDuracao() == 30) {
-						Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, c);
-						c.setAniversarioDataContratacao(c.getAniversarioDataContratacao().plusYears(1));
-						return ferias;  
-					}else if(this.getDuracao() == 15) {
-						LocalDate ultimaFerias = c.getFerias().get(c.getFerias().size()-1).getDataInicio();
+				if (periodoMeses >= 12) {
+					if (this.getDuracao() == 30) {
+						
+						Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao,colaborador);
+						colaborador.setAniversarioDataContratacao(colaborador.getAniversarioDataContratacao().plusYears(1));
+						return ferias;
+						
+					} else if (this.getDuracao() == 15) {
+						LocalDate ultimaFerias = colaborador.getFerias()
+								.get(colaborador.getFerias().size()-1).getDataInicio();
+						
 						LocalDate periodoUltimaFerias = LocalDate.of(ultimaFerias.getYear(),
 								ultimaFerias.getMonth(),
 								ultimaFerias.getDayOfMonth());
 						
 						long periodoMesesUltimaFerias = periodoUltimaFerias.until(dataCadastro, ChronoUnit.MONTHS);
 						
-						int verificacao = Period.between(c.getFerias().get(c.getFerias().size()-1).getDataFim(), this.dataInicio).getDays();
+						int verificacao = Period.between(colaborador.getFerias()
+								.get(colaborador.getFerias()
+								.size()-1)
+								.getDataFim(), this.dataInicio)
+								.getDays();
 						
-						if(periodoMesesUltimaFerias < 12 && verificacao > 0) {
-							Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, c);
-							c.setAniversarioDataContratacao(c.getAniversarioDataContratacao().plusYears(1));
+						if (periodoMesesUltimaFerias < 12 && verificacao > 0) {
+							Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, colaborador);
+							
+							colaborador.setAniversarioDataContratacao
+								(colaborador.getAniversarioDataContratacao().plusYears(1));
+							
 							return ferias;
 							
-						}else {
-							Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, c);
+						} else {
+							Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao, colaborador);
 							return ferias;
 						}
-					
 					}
-				}else {
-					throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Ainda não completaram 12 meses para a sua proxima férias");
+				} else {
+					throw new HttpServerErrorException(HttpStatus.BAD_REQUEST,
+							"Ainda não completaram 12 meses para a sua proxima férias");
 				}
-				
-			}else if(meses < 12) {
-				throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "O Colaborador ainda não possui 1 ano na empresa");
+			} else if(meses < 12) {
+				throw new HttpServerErrorException(HttpStatus.BAD_REQUEST,
+						"O Colaborador ainda não possui 1 ano na empresa");
 			}
-			
-			
-			//-------------------------------------------------------------------------------------------------------
-			
-        }else {
-        	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "As datas não condizem com a duração definida");
+        } else {
+        	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST,
+        			"As datas não condizem com a duração definida");
         }
-		
 		return null;
 	}
 
