@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Drawer from "../../components/sideBar/Drawer";
+import Drawer from "../../components/sideBar";
 import {Content, Container} from "./style";
 import TabelaFerias from "../../components/registroFerias/tabelaFerias";
 import Input from "../../components/registroFerias/inputsTabelaRegistroFerias";

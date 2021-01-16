@@ -1,11 +1,11 @@
 import React,{ useEffect, useState, useCallback} from 'react';
 
-import objetos from '../../json/objetos.json'
+import objetos from '../../../json/objetos.json'
 import {Content, Button} from './style.js'
 
 import {TextField, Grid} from "@material-ui/core";
 
-import api from '../../services/api';
+import api from '../../../services/api';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
