@@ -23,7 +23,7 @@ public class ColaboradorController {
 	
 	@GetMapping("/colaboradores")
 	public ResponseEntity <List<ColaboradorDTO>> buscarTodos() {
-		List<Colaborador> colaboradores = colaboradorRepository.findAll();
+		List<Colaborador> colaboradores = colaboradorRepository.buscarTodos();
 		List<ColaboradorDTO> colaboradoresDTO = colaboradores
 				.stream()
 				.map(x -> new ColaboradorDTO(x))
@@ -44,8 +44,8 @@ public class ColaboradorController {
 	}
 	
 	@GetMapping("/colaborador/{login}")
-	public ResponseEntity<ColaboradorResponseDTO> listaProdutoUnico(@PathVariable String login) {
-		Colaborador colaborador = colaboradorRepository.findByLogin(login);
+	public ResponseEntity<ColaboradorResponseDTO> buscarColaboradorPorID(@PathVariable String login) {
+		Colaborador colaborador = colaboradorRepository.buscarPorLogin(login);
 		ColaboradorResponseDTO colaboradorResponseDTO = new ColaboradorResponseDTO(colaborador);
 				
 		return ResponseEntity.status(HttpStatus.OK).body(colaboradorResponseDTO);

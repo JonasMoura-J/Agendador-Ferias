@@ -26,7 +26,7 @@ public class FeriasRequestDTO {
 	
 	public Ferias toFerias(ColaboradorRepository repository) {
 
-		Colaborador contemColaborador = repository.findByLogin(login);
+		Colaborador contemColaborador = repository.buscarPorLogin(login);
 		
 		if (contemColaborador == null) {
 			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "O login não existe");

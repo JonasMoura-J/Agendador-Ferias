@@ -154,7 +154,7 @@ public class FeriasController {
 		Ferias valida = feriasRepository.findById(ferias.getId());
 		
 		if (valida == null) {
-				Colaborador colaborador = colaboradorRepository.findByLogin(dto.getLogin());
+				Colaborador colaborador = colaboradorRepository.buscarPorLogin(dto.getLogin());
 				colaborador.getFerias().add(ferias);
 				
 				feriasRepository.save(ferias);
