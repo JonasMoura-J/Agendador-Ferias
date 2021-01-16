@@ -1,6 +1,7 @@
 package br.com.alterdata.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import br.com.alterdata.domain.Colaborador;
 
@@ -16,6 +17,8 @@ public class ColaboradorResponseDTO implements Serializable{
 	
 	private String email;
 	
+	private LocalDate dataAdmissao;
+	
 	@SuppressWarnings("unused")
 	private ColaboradorResponseDTO() {
 		
@@ -27,6 +30,7 @@ public class ColaboradorResponseDTO implements Serializable{
 		this.login = colaborador.getLogin();
 		this.nome = colaborador.getNome();
 		this.email = colaborador.getEmail();
+		this.dataAdmissao = colaborador.getDataAdmissao();
 	}
 
 	public long getId() {
@@ -59,6 +63,14 @@ public class ColaboradorResponseDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public LocalDate getDataAdmissao() {
+		return dataAdmissao;
+	}
+
+	public void setDataAdmissao(LocalDate dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
 	}
 
 }

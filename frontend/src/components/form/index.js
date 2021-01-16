@@ -18,7 +18,7 @@ export default function LayoutTextFields() {
 
   const[login, setLogin] = useState("");
   const[email, setEmail] = useState("");
-  const[dias, setDias] = useState();
+  const[dias, setDias] = useState(15);
   const[inicio, setInicio] = useState("");
   const[fim, setFim] = useState("");
 
@@ -31,12 +31,42 @@ export default function LayoutTextFields() {
       dataInicio: inicio,
       dataFim: fim
     }
+
+    var partesData = params.dataInicio.split("-");
+    var dataInicio = new Date(partesData[0], partesData[1] - 1, partesData[2]);
+    var partesData2 = params.dataFim.split("-");
+    var dataFim = new Date(partesData2[0], partesData2[1] - 1, partesData2[2]);
+
+    var hoje = new Date();
+
+    if(dataInicio <= hoje){
+      alert('Não é possível cadastrar em datas passadas', 'error')
+      return
+    }
+
+    var partesDataAdmissao = dadosColaborador.dataAdmissao.split("-");
+    var dataAdmissao = new Date(partesDataAdmissao[0], partesDataAdmissao[1] - 1, partesDataAdmissao[2]);
+    var diferenca = Math.abs(hoje.getTime() - dataAdmissao.getTime());
+    var diferencaEmDias = Math.ceil(diferenca / (1000 * 3600 * 24))+1;
+    if(diferencaEmDias<360){
+      alert('O Colaborador ainda não possui um ano na empresa', 'error')
+      return
+    }
+
+    var timeDiff = Math.abs(dataFim.getTime() - dataInicio.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))+1;
+
+    if(diffDays !== parseInt(params.duracao)){
+      alert('A duração entre a data de inicio e a data fim não condizem com a duração', 'error')
+      return
+    }
+
     try {
       await api.post("ferias", params);
       alert('Férias registrada com sucesso!', 'success')
       
     } catch (error) {
-      alert('Erro ao registrar férias!', 'error')
+      alert('Não foi possível cadastrar as férias do colaborador', 'error')
     }
   }
 
@@ -48,6 +78,7 @@ export default function LayoutTextFields() {
 
     } catch (error) {
       console.log("getColaborador: ", error);
+      alert("Usuário não encontrado", "error")
     }
   }
 
