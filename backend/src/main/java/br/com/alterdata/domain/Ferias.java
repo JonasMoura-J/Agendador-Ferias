@@ -112,11 +112,12 @@ public class Ferias implements Serializable, Comparable<Ferias>{
 				+ "Temos uma ótima notícia!\r\n"
 				+ "As suas FÉRIAS foram agendadas para a data de " + inicio + " com a duração de " + duracao + " dias, com o término para o dia " + fim + ". Espero que aproveite e descanse bastante neste período.\r\n"
 				+ "\r\n"
-				+ "Best wishes,\r\n"
-				+ "JavaMail team";
+				+ "Atenciosamente,\r\n"
+				+ "RH Alterdata Software";
 		
 		SendMail mail = new SendMail();
 	
+		
 		    try {
 		        mail.sendMail("agendadorferias@gmail.com", email , "Aviso de Agendamento de férias!", mensagem);
 		    } catch (Exception e) {

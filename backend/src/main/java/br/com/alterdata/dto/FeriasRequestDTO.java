@@ -32,7 +32,7 @@ public class FeriasRequestDTO {
 			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "O login não existe");
 		}
 		
-		int periodo = Period.between(this.dataInicio,LocalDate.now()).getDays();
+		int periodo = Period.between(LocalDate.now(), this.dataInicio).getDays();
 
 		if (periodo <= 0) {
 
@@ -102,7 +102,8 @@ public class FeriasRequestDTO {
 					if (this.getDuracao() == 30) {
 						
 						Ferias ferias = new Ferias(this.id, this.dataInicio, this.dataFim, this.duracao,colaborador);
-						colaborador.setAniversarioDataContratacao(colaborador.getAniversarioDataContratacao().plusYears(1));
+						colaborador.setAniversarioDataContratacao(colaborador.
+								getAniversarioDataContratacao().plusYears(1));
 						return ferias;
 						
 					} else if (this.getDuracao() == 15) {
