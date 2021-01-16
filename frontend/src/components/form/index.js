@@ -44,6 +44,13 @@ export default function LayoutTextFields() {
       return
     }
 
+    let dataAniversario = dadosColaborador.aniversarioDataContratacao.split("-");
+    console.log("aqui", parseInt(dataAniversario[0]), hoje.getFullYear)
+    if(parseInt(dataAniversario[0]) === hoje.getFullYear()){
+      alert('O Colaborador já usufruiu das férias neste ano', 'error')
+      return
+    }
+
     var partesDataAdmissao = dadosColaborador.dataAdmissao.split("-");
     var dataAdmissao = new Date(partesDataAdmissao[0], partesDataAdmissao[1] - 1, partesDataAdmissao[2]);
     var diferenca = Math.abs(hoje.getTime() - dataAdmissao.getTime());
@@ -80,7 +87,7 @@ export default function LayoutTextFields() {
     } catch (error) {
       console.log("getColaborador: ", error);
       alert("Usuário não encontrado", "error")
-    }
+    } 
   }
 
   const alert = (mensagem, tipo) => {
